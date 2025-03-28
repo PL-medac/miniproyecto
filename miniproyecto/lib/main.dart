@@ -3,10 +3,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import './src/home.dart';
 import 'package:provider/provider.dart';
-import './src/crud.dart';
+import 'src/pages.dart';
 import './src/login.dart';
-import './src/dataInput.dart';
-import './src/settings.dart';
+
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); //para asegurar q flutter esté correctamente inicializado

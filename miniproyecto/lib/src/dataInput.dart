@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 
 class DataInputPage extends StatefulWidget {
   const DataInputPage({super.key});
@@ -36,7 +36,7 @@ class _DataInputPage extends State<DataInputPage> {
 
     // Para el navegador, que se coloree
     var mainArea = ColoredBox(
-      color: colorScheme.surfaceContainerHighest,
+      color: Color.fromARGB(255, 238, 248, 246),
       child: AnimatedSwitcher(
         duration: Duration(milliseconds: 200),
         child: page,
@@ -118,27 +118,29 @@ class _DataInputPage extends State<DataInputPage> {
               children: [
                 SafeArea(
                   child: NavigationRail(
+                    
+                    backgroundColor: Color.fromARGB(255, 10, 40, 50),
                     extended: constraints.maxWidth >= 600,
                     destinations: [
                       NavigationRailDestination(
-                        icon: Icon(Icons.home),
-                        label: Text('Home'),
+                        icon: Icon(Icons.home, color: Colors.white,),
+                        label: Text('Home', style: TextStyle(color: Colors.white)),
                       ),
                       NavigationRailDestination(
-                        icon: Icon(Icons.assessment_outlined),
-                        label: Text('BBDD'),
+                        icon: Icon(Icons.assessment_outlined, color: Colors.white,),
+                        label: Text('BBDD', style: TextStyle(color: Colors.white)),
                       ),
                       NavigationRailDestination(
-                        icon: Icon(Icons.add_box_outlined),
-                        label: Text('Data Input'),
+                        icon: Icon(Icons.add_box_outlined, color: Colors.white,),
+                        label: Text('Data Input', style: TextStyle(color: Colors.white)),
                       ),
                       NavigationRailDestination(
-                        icon: Icon(Icons.settings),
-                        label: Text('Settings'),
+                        icon: Icon(Icons.settings, color: Colors.white,),
+                        label: Text('Settings', style: TextStyle(color: Colors.white)),
                       ),
                       NavigationRailDestination(
-                        icon: Icon(Icons.exit_to_app),
-                        label: Text('Exit'),
+                        icon: Icon(Icons.exit_to_app, color: Colors.white,),
+                        label: Text('Exit', style: TextStyle(color: Colors.white)),
                       ),
                     ],
                     selectedIndex: selectedIndex,
@@ -158,3 +160,4 @@ class _DataInputPage extends State<DataInputPage> {
     );
   }
 }
+*/

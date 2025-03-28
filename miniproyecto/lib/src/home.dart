@@ -1,11 +1,6 @@
-import 'dart:ui';
-
-import 'package:flutter/rendering.dart';
-import 'package:miniproyecto/src/dataInput.dart';
-import 'package:miniproyecto/src/settings.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import './crud.dart';
+import 'pages.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -18,7 +13,36 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'PharmaStock',
-        theme: ThemeData(primaryColor: Color.fromARGB(255, 5, 157, 149)),
+        theme: ThemeData(
+          primaryColor: Color(0xFF085F63), // Color principal
+          scaffoldBackgroundColor: Color.fromARGB(255, 240, 245, 249), // Fondo de la app
+          appBarTheme: AppBarTheme(
+            backgroundColor: Color(0xFF085F63), 
+            foregroundColor: Colors.white, // Color de los iconos y texto
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle (
+            backgroundColor: WidgetStateProperty.all(Color.fromARGB(255, 23, 109, 97)),
+            foregroundColor: WidgetStateProperty.all(Colors.white),
+            textStyle: WidgetStateProperty.all(TextStyle(fontSize: 30, color: Colors.white)),
+            ),
+
+          ),
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            backgroundColor: Color(0xFF0A2832),
+            selectedItemColor: Colors.white, // Color del icono seleccionado
+            unselectedItemColor: Colors.grey, // Color de icono sin seleccionar
+          ),
+          navigationRailTheme: NavigationRailThemeData(
+            backgroundColor: Color(0xFF0A2832),
+            selectedIconTheme: IconThemeData(color: Colors.white),
+            unselectedIconTheme: IconThemeData(color: Colors.grey),
+            selectedLabelTextStyle: TextStyle(color: Colors.white),
+            unselectedLabelTextStyle: TextStyle(color: Colors.grey),
+          ),
+          
+          
+        ),
         home: MyHomePage(),
       ),
     );
@@ -27,7 +51,12 @@ class MyApp extends StatelessWidget {
 
 class MyAppState extends ChangeNotifier {
   //funciones de la lógica
-  //notifyListeners();
+  int selectedIndex = 0;
+
+  void updateIndex(int newIndex) {
+    selectedIndex = newIndex;
+    notifyListeners(); //notifica los widgets dependientes
+  }
 }
 
 class MyHomePage extends StatefulWidget {
@@ -37,33 +66,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    //var colorScheme = Theme.of(context).colorScheme;
-
-    /*Widget page;
-    switch (selectedIndex) {
-      case 0: //login
-        page = Placeholder();
-        break;
-      case 1: //home
-        page = Placeholder();
-        break;
-      case 2: //crud
-        page = Placeholder();
-        break;
-      case 3: //input
-        page = Placeholder();
-        break;
-      case 4: //setings
-        page = Placeholder();
-        break;
-      default:
-        throw UnimplementedError('no widget for $selectedIndex');
-    }*/
-
+    
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -107,6 +113,7 @@ class _ElevatedButtonExampleState extends State<ElevatedButtonExample> {
     final ButtonStyle style = ElevatedButton.styleFrom(
       backgroundColor: Color.fromARGB(255, 23, 109, 97),
       foregroundColor: Colors.white,
+      
       textStyle: const TextStyle(fontSize: 30, color: Colors.white),
       minimumSize: const Size(400, 70),
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
@@ -122,9 +129,13 @@ class _ElevatedButtonExampleState extends State<ElevatedButtonExample> {
               ElevatedButton(
                 style: style,
                 onPressed: () {
+                  Provider.of<MyAppState>(
+                    context,
+                    listen: false,
+                  ).updateIndex(1);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => StockPage()),
+                    MaterialPageRoute(builder: (context) => PageOfPage()),
                   );
                 },
                 child: const Text('Stock'),
@@ -133,20 +144,28 @@ class _ElevatedButtonExampleState extends State<ElevatedButtonExample> {
               ElevatedButton(
                 style: style,
                 onPressed: () {
+                  Provider.of<MyAppState>(
+                    context,
+                    listen: false,
+                  ).updateIndex(2);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => DataInputPage()),
+                    MaterialPageRoute(builder: (context) => PageOfPage()),
                   );
                 },
-                child: const Text('New'),
+                child: const Text('New Input'),
               ),
               const SizedBox(height: 30),
               ElevatedButton(
                 style: style,
                 onPressed: () {
+                  Provider.of<MyAppState>(
+                    context,
+                    listen: false,
+                  ).updateIndex(3);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SettingsPage()),
+                    MaterialPageRoute(builder: (context) => PageOfPage()),
                   );
                 },
                 child: const Text('Settings'),
@@ -167,31 +186,4 @@ class _ElevatedButtonExampleState extends State<ElevatedButtonExample> {
   }
 }
           
-          
-         /* 
-          (
-            onPressed: (){}, 
-            child: Text("Stock")
-        ),
         
-        ElevatedButton(
-            onPressed: (){}, 
-            child: Text("Input")
-        ),
-
-        ElevatedButton(
-            onPressed: (){}, 
-            child: Text("Settings")
-        ),
-
-        ElevatedButton(
-            onPressed: (){}, 
-            child: Text("Exit")
-      ),
-      ),
-    ),
-    );
-  }
-}
-
-*/
