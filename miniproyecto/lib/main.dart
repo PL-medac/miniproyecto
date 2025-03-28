@@ -1,32 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import './src/home.dart';
+import 'package:provider/provider.dart';
+import 'src/pages.dart';
+import './src/login.dart';
+
+
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized(); //para asegurar q flutter esté correctamente inicializado
 
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(
+    fileName: ".env",
+  ); //caga var entorno desde .env (para info sensible)
 
-  String supabaseUrl = dotenv.env['SUPABASE_URL'] ?? '';
-  String supabaseAnonKey = dotenv.env['SUPABASE_ANON_KEY'] ?? '';
+  String supabaseUrl = dotenv.env['SUPABASE_URL'] ?? ''; //URL
+  String supabaseAnonKey =
+      dotenv.env['SUPABASE_ANON_KEY'] ??
+      ''; //obtiene clave anónima de supabase desde el archivo .env
 
-  await Supabase.initialize(url: supabaseUrl, anonKey: supabaseAnonKey);
-  runApp(const MyApp());
-}
+  await Supabase.initialize(
+    url: supabaseUrl,
+    anonKey: supabaseAnonKey,
+  ); //inicializa conexión con supabase
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Farmacéutica',
-      home: Scaffold(
-        appBar: AppBar(title: const Text('FarmacéuticApp')),
-        body: const Center(child: Text('Home Page')),
-      ),
-    );
-  }
+  runApp(MyApp());
 }
