@@ -45,7 +45,7 @@ class _PageOfPageState extends State<PageOfPage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 133, 214, 204),
+        backgroundColor: Color(0xFF248F8D), // Nuevo color aplicado
         /*
        Intento de poner imagen del logo:
         title: Image.asset(
@@ -80,12 +80,10 @@ class _PageOfPageState extends State<PageOfPage> {
                 ),
                 SafeArea(
                   child: BottomNavigationBar(
-                    backgroundColor: Color.fromARGB(255, 10, 40, 50),
+                    backgroundColor: Color(0xFF494949),
                     items: [
-                      
                       BottomNavigationBarItem(
-                        icon: Icon(Icons.home, 
-                        color: Colors.white),
+                        icon: Icon(Icons.home, color: Colors.white),
                         label: 'Home',
                       ),
                       BottomNavigationBarItem(
@@ -106,13 +104,12 @@ class _PageOfPageState extends State<PageOfPage> {
                       BottomNavigationBarItem(
                         icon: Icon(Icons.exit_to_app, color: Colors.white),
                         label: 'Exit',
-                        
                       ),
                     ],
                     currentIndex: selectedIndex,
                     selectedItemColor: Color.fromARGB(255, 7, 219, 194),
                     unselectedItemColor: Colors.white,
-                    
+
                     onTap: (selectedIndex) {
                       final myAppState = Provider.of<MyAppState>(
                         context,
@@ -122,11 +119,8 @@ class _PageOfPageState extends State<PageOfPage> {
                         // Navegar a Home + eliminar todo el historial
                         Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => MyHomePage(),
-                          ), 
-                          (route) =>
-                              false, 
+                          MaterialPageRoute(builder: (context) => MyHomePage()),
+                          (route) => false,
                         );
                       } else {
                         setState(() {
@@ -156,7 +150,7 @@ class _PageOfPageState extends State<PageOfPage> {
                     //para estrecha la barra, pero no me convence:
                     //minWidth: 56,
                     //groupAlignment: -1,
-                    backgroundColor: Color.fromARGB(255, 10, 40, 50),
+                    backgroundColor: Color(0xFF494949),
                     extended: constraints.maxWidth >= 600,
                     destinations: [
                       NavigationRailDestination(
@@ -199,7 +193,7 @@ class _PageOfPageState extends State<PageOfPage> {
                       ),
                     ],
                     selectedIndex: selectedIndex,
-                    
+
                     onDestinationSelected: (selectedIndex) {
                       final myAppState = Provider.of<MyAppState>(
                         context,
@@ -209,9 +203,7 @@ class _PageOfPageState extends State<PageOfPage> {
                         // Navegar a Home + eliminar todo el historial
                         Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => MyHomePage(),
-                          ), 
+                          MaterialPageRoute(builder: (context) => MyHomePage()),
                           (route) =>
                               false, // Elimina todas las pantallas anteriores
                         );
