@@ -84,7 +84,11 @@ class _MyHomePageState extends State<MyHomePage> {
           //     "assets/logo.pdf",
           //     height: 40,
           //   ),*/
-          title: Text("PharmaStock"),
+         title: Image.asset(
+  "../../assets/logo.png", // Ruta de la imagen en assets
+  height: 50, // Ajusta el tamaño según sea necesario
+),
+
           centerTitle: true,
           actions: [
             Padding(
