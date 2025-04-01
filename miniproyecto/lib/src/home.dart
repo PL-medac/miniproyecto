@@ -15,18 +15,26 @@ class MyApp extends StatelessWidget {
         title: 'PharmaStock',
         theme: ThemeData(
           primaryColor: Color(0xFF085F63), // Color principal
-          scaffoldBackgroundColor: Color.fromARGB(255, 240, 245, 249), // Fondo de la app
+          scaffoldBackgroundColor: Color.fromARGB(
+            255,
+            240,
+            245,
+            249,
+          ), // Fondo de la app
           appBarTheme: AppBarTheme(
-            backgroundColor: Color(0xFF085F63), 
+            backgroundColor: Color(0xFF085F63),
             foregroundColor: Colors.white, // Color de los iconos y texto
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ButtonStyle (
-            backgroundColor: WidgetStateProperty.all(Color.fromARGB(255, 23, 109, 97)),
-            foregroundColor: WidgetStateProperty.all(Colors.white),
-            textStyle: WidgetStateProperty.all(TextStyle(fontSize: 30, color: Colors.white)),
+            style: ButtonStyle(
+              backgroundColor: WidgetStateProperty.all(
+                Color.fromARGB(255, 23, 109, 97),
+              ),
+              foregroundColor: WidgetStateProperty.all(Colors.white),
+              textStyle: WidgetStateProperty.all(
+                TextStyle(fontSize: 30, color: Colors.white),
+              ),
             ),
-
           ),
           bottomNavigationBarTheme: BottomNavigationBarThemeData(
             backgroundColor: Color(0xFF0A2832),
@@ -40,8 +48,6 @@ class MyApp extends StatelessWidget {
             selectedLabelTextStyle: TextStyle(color: Colors.white),
             unselectedLabelTextStyle: TextStyle(color: Colors.grey),
           ),
-          
-          
         ),
         home: MyHomePage(),
       ),
@@ -66,21 +72,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
-    
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 133, 214, 204),
-          /*
-        Intento de poner imagen del logo:
-          title: Image.asset(
-            "assets/logo.pdf",  
-            height: 40,
-          ),*/
-          title: Text("PharmaStock"),
+          backgroundColor: Color(0xFF248F8D),
+          //   /*
+          // Intento de poner imagen del logo:
+          //   title: Image.asset(
+          //     "assets/logo.pdf",
+          //     height: 40,
+          //   ),*/
+         title: Image.asset(
+  "../../assets/logo.png", // Ruta de la imagen en assets
+  height: 50, // Ajusta el tamaño según sea necesario
+),
+
           centerTitle: true,
           actions: [
             Padding(
@@ -113,7 +121,7 @@ class _ElevatedButtonExampleState extends State<ElevatedButtonExample> {
     final ButtonStyle style = ElevatedButton.styleFrom(
       backgroundColor: Color.fromARGB(255, 23, 109, 97),
       foregroundColor: Colors.white,
-      
+
       textStyle: const TextStyle(fontSize: 30, color: Colors.white),
       minimumSize: const Size(400, 70),
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
@@ -185,5 +193,3 @@ class _ElevatedButtonExampleState extends State<ElevatedButtonExample> {
     );
   }
 }
-          
-        
