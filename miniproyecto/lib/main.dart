@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:miniproyecto/auth/auth_gate.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
@@ -23,10 +24,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Farmacéutica',
-      home: Scaffold(
-        appBar: AppBar(title: const Text('FarmacéuticApp')),
-        body: const Center(child: Text('Home Page')),
-      ),
+      home: AuthGate(),
+      // Scaffold(
+      //   appBar: AppBar(title: const Text('FarmacéuticApp')),
+      //   body: const Center(child: Text('Home Page')),
+      // ),
     );
   }
 }
