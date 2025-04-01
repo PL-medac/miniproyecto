@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:miniproyecto/auth/auth_gate.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import './src/home.dart';
+import 'screens/home_screen.dart';
 import 'package:provider/provider.dart';
-import 'src/pages.dart';
-import './src/login.dart';
+import 'screens/dashboard_screen.dart';
+import 'screens/login_screen.dart';
 
 
 
