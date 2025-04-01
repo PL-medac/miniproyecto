@@ -26,4 +26,5 @@ void main() async {
     anonKey: supabaseAnonKey,
   ); //inicializa conexión con supabase
 
+runApp(MyApp());
 }
