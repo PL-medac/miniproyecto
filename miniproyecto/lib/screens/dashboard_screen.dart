@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:miniproyecto/src/home.dart';
+import 'package:miniproyecto/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
 class PageOfPage extends StatefulWidget {
@@ -12,6 +12,7 @@ class _PageOfPageState extends State<PageOfPage> {
   @override
   Widget build(BuildContext context) {
     var selectedIndex = Provider.of<MyAppState>(context).selectedIndex;
+
     Widget page;
     switch (selectedIndex) {
       case 0: //home. Se agrega un valor váliso para evitar error

@@ -1,6 +1,6 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'pages.dart';
+import 'dashboard_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -84,10 +84,10 @@ class _MyHomePageState extends State<MyHomePage> {
           //     "assets/logo.pdf",
           //     height: 40,
           //   ),*/
-         title: Image.asset(
-  "../../assets/logo.png", // Ruta de la imagen en assets
-  height: 50, // Ajusta el tamaño según sea necesario
-),
+          title: Image.asset(
+            "../../assets/logo.png", // Ruta de la imagen en assets
+            height: 50, // Ajusta el tamaño según sea necesario
+          ),
 
           centerTitle: true,
           actions: [
