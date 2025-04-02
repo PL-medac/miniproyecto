@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:miniproyecto/screens/home_screen.dart';
 import 'package:provider/provider.dart';
+import '../pages/medicamentos_pages.dart';
 
 class PageOfPage extends StatefulWidget {
   const PageOfPage({super.key});
@@ -47,10 +48,11 @@ class _PageOfPageState extends State<PageOfPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF248F8D), // Nuevo color aplicado
-        
-           title: Image.asset("assets/logo.png", // Ruta de la imagen en assets
-              height: 50, // Ajusta el tamaño según sea necesario
-              ),
+
+        title: Image.asset(
+          "assets/logo.png", // Ruta de la imagen en assets
+          height: 50, // Ajusta el tamaño según sea necesario
+        ),
 
         centerTitle: true,
         actions: [
@@ -70,10 +72,7 @@ class _PageOfPageState extends State<PageOfPage> {
           if (constraints.maxWidth < 450) {
             return Column(
               children: [
-                Expanded(
-                  child: mainArea,
-                  
-                ),
+                Expanded(child: mainArea),
                 SafeArea(
                   child: BottomNavigationBar(
                     backgroundColor: Color(0xFF494949),
@@ -143,7 +142,6 @@ class _PageOfPageState extends State<PageOfPage> {
               children: [
                 SafeArea(
                   child: NavigationRail(
-                    
                     backgroundColor: Color(0xFF494949),
                     extended: constraints.maxWidth >= 600,
                     destinations: [
@@ -230,22 +228,10 @@ class _PageOfPageState extends State<PageOfPage> {
   }
 }
 
-class StockPage extends StatefulWidget {
-  const StockPage({super.key});
-  @override
-  State<StockPage> createState() => _StockPage();
-}
-
-class _StockPage extends State<StockPage> {
+class StockPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ElevatedButton.icon(
-        onPressed: () {},
-        icon: Icon(Icons.favorite),
-        label: Text('Like'),
-      ),
-    );
+    return Scaffold(body: MedicamentosStockPage());
   }
 }
 
