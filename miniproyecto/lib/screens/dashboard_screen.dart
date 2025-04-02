@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:miniproyecto/screens/home_screen.dart';
 import 'package:provider/provider.dart';
+import '../pages/medicamentos_pages.dart';
 
 class PageOfPage extends StatefulWidget {
   const PageOfPage({super.key});
@@ -241,24 +242,16 @@ class _PageOfPageState extends State<PageOfPage> {
   }
 }
 
-class StockPage extends StatefulWidget {
-  const StockPage({super.key});
-  @override
-  State<StockPage> createState() => _StockPage();
-}
 
-class _StockPage extends State<StockPage> {
+class StockPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ElevatedButton.icon(
-        onPressed: () {},
-        icon: Icon(Icons.favorite),
-        label: Text('Like'),
-      ),
+    return Scaffold(   
+      body: MedicamentosStockPage(),  // Muestra el listado de la pagina de listado de medicamentos
     );
   }
 }
+
 
 class DataInputPage extends StatefulWidget {
   const DataInputPage({super.key});
