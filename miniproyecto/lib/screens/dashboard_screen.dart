@@ -458,6 +458,7 @@ class _SettingsPageState extends State<SettingsPage> {
       valNotify1 = newValue1;
     });
   }
+
   onChangeFunction2(bool newValue2) {
     setState(() {
       valNotify2 = newValue2;
@@ -502,22 +503,29 @@ class _SettingsPageState extends State<SettingsPage> {
           Divider(height: 20, thickness: 1),
           SizedBox(height: 10),
           buildNotificationOption("Theme Dark", valNotify1, onChangeFunction1),
-          buildNotificationOption("Notifications Active", valNotify2, onChangeFunction2),
+          buildNotificationOption(
+            "Notifications Active",
+            valNotify2,
+            onChangeFunction2,
+          ),
           SizedBox(height: 50),
           Center(
             child: OutlinedButton(
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)
-                )
+                  borderRadius: BorderRadius.circular(20),
+                ),
               ),
-              onPressed: (){},
-              child: Text("SIGN OUT", style: TextStyle(
-                fontSize: 16,
-                letterSpacing: 2.2,
-                color: Colors.black,
-              ),)
+              onPressed: () {},
+              child: Text(
+                "SIGN OUT",
+                style: TextStyle(
+                  fontSize: 16,
+                  letterSpacing: 2.2,
+                  color: Colors.black,
+                ),
+              ),
             ),
           ),
         ],
