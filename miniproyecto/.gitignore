@@ -46,3 +46,5 @@ app.*.map.json
 
 # Configuration files with credentials
 *.env
+
+.vscode/

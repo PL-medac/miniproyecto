@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => MyAppState(),
+      create: (_) => MyAppState(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'PharmaStock',
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
             backgroundColor: Color(0xFF085F63),
             foregroundColor: Colors.white, // Color de los iconos y texto
           ),
-          elevatedButtonTheme: ElevatedButtonThemeData(
+          /*elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
               backgroundColor: WidgetStateProperty.all(
                 Color.fromARGB(255, 23, 109, 97),
@@ -47,16 +47,15 @@ class MyApp extends StatelessWidget {
             unselectedIconTheme: IconThemeData(color: Colors.grey),
             selectedLabelTextStyle: TextStyle(color: Colors.white),
             unselectedLabelTextStyle: TextStyle(color: Colors.grey),
-          ),
+          ),*/
         ),
-        home: MyHomePage(),
+        home: const MyHomePage(),
       ),
     );
   }
 }
 
 class MyAppState extends ChangeNotifier {
-  //funciones de la lógica
   int selectedIndex = 0;
 
   void updateIndex(int newIndex) {
@@ -74,25 +73,19 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return  Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFF248F8D),
-          //   /*
-          // Intento de poner imagen del logo:
-          //   title: Image.asset(
-          //     "assets/logo.pdf",
-          //     height: 40,
-          //   ),*/
+          
           title: Image.asset(
-            "../../assets/logo.png", // Ruta de la imagen en assets
+            "assets/logo.png", // Ruta de la imagen en assets
             height: 50, // Ajusta el tamaño según sea necesario
           ),
 
           centerTitle: true,
           actions: [
             Padding(
-              padding: EdgeInsets.only(right: 16.0),
+              padding: const EdgeInsets.only(right: 16.0),
               child: IconButton(
                 onPressed: () {
                   debugPrint("Notificaciones");
@@ -103,32 +96,26 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         body: ElevatedButtonExample(),
-      ),
+      
     );
   }
 }
 
-class ElevatedButtonExample extends StatefulWidget {
+class ElevatedButtonExample extends StatelessWidget {
   const ElevatedButtonExample({super.key});
 
   @override
-  State<ElevatedButtonExample> createState() => _ElevatedButtonExampleState();
-}
-
-class _ElevatedButtonExampleState extends State<ElevatedButtonExample> {
-  @override
+ 
   Widget build(BuildContext context) {
     final ButtonStyle style = ElevatedButton.styleFrom(
       backgroundColor: Color.fromARGB(255, 23, 109, 97),
       foregroundColor: Colors.white,
-
-      textStyle: const TextStyle(fontSize: 30, color: Colors.white),
-      minimumSize: const Size(400, 70),
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+      textStyle: const TextStyle(fontSize: 18,),
+      minimumSize: const Size(400, 60),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
     );
 
-    return Scaffold(
-      body: Padding(
+    return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10), // Margen lateral
         child: Center(
           child: Column(
@@ -137,48 +124,42 @@ class _ElevatedButtonExampleState extends State<ElevatedButtonExample> {
               ElevatedButton(
                 style: style,
                 onPressed: () {
-                  Provider.of<MyAppState>(
-                    context,
-                    listen: false,
-                  ).updateIndex(1);
+                  //Provider.of<MyAppState>( context, listen: false,).updateIndex(1);
+                  context.read<MyAppState>().updateIndex(1);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PageOfPage()),
+                    MaterialPageRoute(builder: (_) => const PageOfPage()),
                   );
                 },
                 child: const Text('Stock'),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               ElevatedButton(
                 style: style,
                 onPressed: () {
-                  Provider.of<MyAppState>(
-                    context,
-                    listen: false,
-                  ).updateIndex(2);
+                  //Provider.of<MyAppState>(context,listen: false, ).updateIndex(2);
+                  context.read<MyAppState>().updateIndex(2);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PageOfPage()),
+                    MaterialPageRoute(builder: (_) => const PageOfPage()),
                   );
                 },
                 child: const Text('New Input'),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               ElevatedButton(
                 style: style,
                 onPressed: () {
-                  Provider.of<MyAppState>(
-                    context,
-                    listen: false,
-                  ).updateIndex(3);
+                  //Provider.of<MyAppState>(context,listen: false,).updateIndex(3);
+                  context.read<MyAppState>().updateIndex(3);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PageOfPage()),
+                    MaterialPageRoute(builder: (_) => const PageOfPage()),
                   );
                 },
                 child: const Text('Settings'),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               ElevatedButton(
                 style: style,
                 onPressed: () {
@@ -189,7 +170,7 @@ class _ElevatedButtonExampleState extends State<ElevatedButtonExample> {
             ],
           ),
         ),
-      ),
+     
     );
   }
 }

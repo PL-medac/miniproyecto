@@ -1,7 +1,10 @@
+
 import 'package:flutter/material.dart';
-import 'package:miniproyecto/screens/home_screen.dart';
+import 'package:miniproyecto/screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
-import '../pages/medicamentos_pages.dart';
+import '../../pages/medicamentos_pages.dart';
+import '../../pages/data_input_page.dart';
+import '../../pages/settings_pages.dart';
 
 class PageOfPage extends StatefulWidget {
   const PageOfPage({super.key});
@@ -48,16 +51,11 @@ class _PageOfPageState extends State<PageOfPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF248F8D), // Nuevo color aplicado
-        /*
-       Intento de poner imagen del logo:
+
         title: Image.asset(
-          "assets/logo.pdf",  
-          height: 40,
-        ),*/
-           title: Image.asset(
-  "../../assets/logo.png", // Ruta de la imagen en assets
-  height: 50, // Ajusta el tamaño según sea necesario
-),
+          "assets/logo.png", // Ruta de la imagen en assets
+          height: 50, // Ajusta el tamaño según sea necesario
+        ),
 
         centerTitle: true,
         actions: [
@@ -75,15 +73,9 @@ class _PageOfPageState extends State<PageOfPage> {
       body: LayoutBuilder(
         builder: (context, constraints) {
           if (constraints.maxWidth < 450) {
-            // Use a more mobile-friendly layout with BottomNavigationBar
-            // on narrow screens.
-
             return Column(
               children: [
-                Expanded(
-                  child: mainArea,
-                  //aquí el contenido de las pág
-                ),
+                Expanded(child: mainArea),
                 SafeArea(
                   child: BottomNavigationBar(
                     backgroundColor: Color(0xFF494949),
@@ -153,9 +145,6 @@ class _PageOfPageState extends State<PageOfPage> {
               children: [
                 SafeArea(
                   child: NavigationRail(
-                    //para estrecha la barra, pero no me convence:
-                    //minWidth: 56,
-                    //groupAlignment: -1,
                     backgroundColor: Color(0xFF494949),
                     extended: constraints.maxWidth >= 600,
                     destinations: [
@@ -242,51 +231,11 @@ class _PageOfPageState extends State<PageOfPage> {
   }
 }
 
-
 class StockPage extends StatelessWidget {
+  const StockPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(   
-      body: MedicamentosStockPage(),  // Muestra el listado de la pagina de listado de medicamentos
-    );
-  }
-}
-
-
-class DataInputPage extends StatefulWidget {
-  const DataInputPage({super.key});
-  @override
-  State<DataInputPage> createState() => _DataInputPage();
-}
-
-class _DataInputPage extends State<DataInputPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: ElevatedButton.icon(
-        onPressed: () {},
-        icon: Icon(Icons.favorite),
-        label: Text('Hate'),
-      ),
-    );
-  }
-}
-
-class SettingsPage extends StatefulWidget {
-  const SettingsPage({super.key});
-  @override
-  State<SettingsPage> createState() => _SettingsPageState();
-}
-
-class _SettingsPageState extends State<SettingsPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: ElevatedButton.icon(
-        onPressed: () {},
-        icon: Icon(Icons.favorite),
-        label: Text('Love'),
-      ),
-    );
+    return Scaffold(body: MedicamentosStockPage());
   }
 }
