@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:miniproyecto/screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
-import '../../pages/medicamentos_pages.dart';
+import '../../pages/medicamentos_page.dart';
 import '../../pages/data_input_page.dart';
-import '../../pages/settings_pages.dart';
+import '../../pages/settings_page.dart';
 
 class PageOfPage extends StatefulWidget {
   const PageOfPage({super.key});
@@ -82,26 +82,26 @@ class _PageOfPageState extends State<PageOfPage> {
                     items: [
                       BottomNavigationBarItem(
                         icon: Icon(Icons.home, color: Colors.white),
-                        label: 'Home',
+                        label: 'Inicio',
                       ),
                       BottomNavigationBarItem(
                         icon: Icon(
                           Icons.assessment_outlined,
                           color: Colors.white,
                         ),
-                        label: 'BBDD',
+                        label: 'Listado Medicamentos',
                       ),
                       BottomNavigationBarItem(
                         icon: Icon(Icons.add_box_outlined, color: Colors.white),
-                        label: 'Data Input',
+                        label: 'Gestión CRUD',
                       ),
                       BottomNavigationBarItem(
                         icon: Icon(Icons.settings, color: Colors.white),
-                        label: 'Settings',
+                        label: 'Ajustes',
                       ),
                       BottomNavigationBarItem(
                         icon: Icon(Icons.exit_to_app, color: Colors.white),
-                        label: 'Exit',
+                        label: 'Cerrar Sesión',
                       ),
                     ],
                     currentIndex: selectedIndex,
@@ -151,7 +151,7 @@ class _PageOfPageState extends State<PageOfPage> {
                       NavigationRailDestination(
                         icon: Icon(Icons.home, color: Colors.white),
                         label: Text(
-                          'Home',
+                          'Inicio',
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -161,28 +161,28 @@ class _PageOfPageState extends State<PageOfPage> {
                           color: Colors.white,
                         ),
                         label: Text(
-                          'BBDD',
+                          'Listado Medicamentos',
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
                       NavigationRailDestination(
                         icon: Icon(Icons.add_box_outlined, color: Colors.white),
                         label: Text(
-                          'Data Input',
+                          'Gestión CRUD',
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
                       NavigationRailDestination(
                         icon: Icon(Icons.settings, color: Colors.white),
                         label: Text(
-                          'Settings',
+                          'Ajustes',
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
                       NavigationRailDestination(
                         icon: Icon(Icons.exit_to_app, color: Colors.white),
                         label: Text(
-                          'Exit',
+                          'Cerrar Sesión',
                           style: TextStyle(color: Colors.white),
                         ),
                       ),

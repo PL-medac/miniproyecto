@@ -36,7 +36,7 @@ class _SettingsPageState extends State<SettingsPage> {
               Icon(Icons.account_circle_sharp),
               SizedBox(width: 10),
               Text(
-                "Account",
+                "Cuenta",
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
             ],
@@ -44,25 +44,25 @@ class _SettingsPageState extends State<SettingsPage> {
 
           Divider(height: 20, thickness: 1),
           SizedBox(height: 10),
-          buildAccountOption(context, "Change Password"),
-          buildAccountOption(context, "Language"),
-          buildAccountOption(context, "Privacy and Security"),
+          buildAccountOption(context, "Cambiar contraseña"),
+          buildAccountOption(context, "Idioma"),
+          buildAccountOption(context, "Privacidad y seguridad"),
           SizedBox(height: 40),
           Row(
             children: [
               Icon(Icons.volume_up_rounded),
               SizedBox(width: 10),
               Text(
-                "Notifications",
+                "Notificaciones",
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
             ],
           ),
           Divider(height: 20, thickness: 1),
           SizedBox(height: 10),
-          buildNotificationOption("Theme Dark", valNotify1, onChangeFunction1),
+          buildNotificationOption("Modo claro/oscuro", valNotify1, onChangeFunction1),
           buildNotificationOption(
-            "Notifications Active",
+            "Notificaciones activas",
             valNotify2,
             onChangeFunction2,
           ),
@@ -77,7 +77,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               onPressed: () {},
               child: Text(
-                "SIGN OUT",
+                "Cerrar sesión",
                 style: TextStyle(
                   fontSize: 16,
                   letterSpacing: 2.2,
