@@ -1,3 +1,5 @@
+import 'package:miniproyecto/repository/auth_service.dart';
+import 'package:miniproyecto/screens/login/login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'dashboard_screen.dart';
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
             foregroundColor: Colors.white,
           ),
         ),
-        home: const MyHomePage(),
+        home: const LoginPage(),
       ),
     );
   }
@@ -48,6 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF248F8D),
+
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
@@ -116,7 +119,9 @@ class ElevatedButtonExample extends StatelessWidget {
     );
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+
+      padding: const EdgeInsets.symmetric(horizontal: 10), // Margen lateral
+
       child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -124,45 +129,68 @@ class ElevatedButtonExample extends StatelessWidget {
             ElevatedButton(
               style: style,
               onPressed: () {
+
+                //Provider.of<MyAppState>( context, listen: false,).updateIndex(1);
+
                 context.read<MyAppState>().updateIndex(1);
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => const PageOfPage()),
                 );
               },
+
               child: const Text('Listado Medicamentos'),
+
             ),
             const SizedBox(height: 20),
             ElevatedButton(
               style: style,
               onPressed: () {
+
+                //Provider.of<MyAppState>(context,listen: false, ).updateIndex(2);
+
                 context.read<MyAppState>().updateIndex(2);
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => const PageOfPage()),
                 );
               },
+
               child: const Text('Gestión CRUD'),
+
             ),
             const SizedBox(height: 20),
             ElevatedButton(
               style: style,
               onPressed: () {
+                //Provider.of<MyAppState>(context,listen: false,).updateIndex(3);
+
                 context.read<MyAppState>().updateIndex(3);
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => const PageOfPage()),
                 );
               },
+
               child: const Text('Ajustes'),
+
             ),
             const SizedBox(height: 20),
             ElevatedButton(
               style: style,
-              onPressed: () {
-                debugPrint("Cerrar Sesión");
+
+              onPressed: () async {
+                final authservice = AuthService();
+                await authservice.signOut();
+
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (_) => const LoginPage()),
+                  (route) => false,
+                );
               },
-              child: const Text('Cerrar Sesión'),
+              child: const Text('Exit'),
+
             ),
           ],
         ),

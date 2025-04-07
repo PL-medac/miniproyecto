@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart'; 
 import 'package:miniproyecto/repository/auth_service.dart';
 import 'package:miniproyecto/pages/register_page.dart';
+import 'package:miniproyecto/screens/home/home_screen.dart';
 import 'dart:ui'; // Necesario para el BackdropFilter
 
 class LoginPage extends StatefulWidget {
@@ -12,28 +14,39 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final authService = AuthService();
+
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   final Color primaryColor = const Color(0xFF248F8D);
 
   void login() async {
-    final email = _emailController.text.trim();
+      final email = _emailController.text;
+
     final password = _passwordController.text;
 
     try {
       await authService.signInWithEmailPassword(email, password);
-    } catch (e) {
+
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Error: $e")),
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const MyHomePage()),
         );
       }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text("Error: $e")));
+      }
+
     }
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Stack(
         children: [
@@ -176,6 +189,7 @@ const SizedBox(height: 30),
                   ),
                 ],
               ),
+
             ),
           ),
         ],

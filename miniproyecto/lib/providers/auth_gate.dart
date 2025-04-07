@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:miniproyecto/pages/login_page.dart';
 import 'package:miniproyecto/pages/profile_page.dart';
+import 'package:miniproyecto/screens/login/login_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthGate extends StatelessWidget {
