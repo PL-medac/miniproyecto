@@ -1,3 +1,5 @@
+import 'package:miniproyecto/repository/auth_service.dart';
+import 'package:miniproyecto/screens/login/login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'dashboard_screen.dart';
@@ -49,7 +51,7 @@ class MyApp extends StatelessWidget {
             unselectedLabelTextStyle: TextStyle(color: Colors.grey),
           ),*/
         ),
-        home: const MyHomePage(),
+        home: const LoginPage(),
       ),
     );
   }
@@ -73,30 +75,29 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(0xFF248F8D),
-          
-          title: Image.asset(
-            "assets/logo.png", // Ruta de la imagen en assets
-            height: 50, // Ajusta el tamaño según sea necesario
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFF248F8D),
 
-          centerTitle: true,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: IconButton(
-                onPressed: () {
-                  debugPrint("Notificaciones");
-                },
-                icon: Icon(Icons.email),
-              ),
-            ),
-          ],
+        title: Image.asset(
+          "assets/logo.png", // Ruta de la imagen en assets
+          height: 50, // Ajusta el tamaño según sea necesario
         ),
-        body: ElevatedButtonExample(),
-      
+
+        centerTitle: true,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: IconButton(
+              onPressed: () {
+                debugPrint("Notificaciones");
+              },
+              icon: Icon(Icons.email),
+            ),
+          ),
+        ],
+      ),
+      body: ElevatedButtonExample(),
     );
   }
 }
@@ -105,72 +106,77 @@ class ElevatedButtonExample extends StatelessWidget {
   const ElevatedButtonExample({super.key});
 
   @override
- 
   Widget build(BuildContext context) {
     final ButtonStyle style = ElevatedButton.styleFrom(
       backgroundColor: Color.fromARGB(255, 23, 109, 97),
       foregroundColor: Colors.white,
-      textStyle: const TextStyle(fontSize: 18,),
+      textStyle: const TextStyle(fontSize: 18),
       minimumSize: const Size(400, 60),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
     );
 
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10), // Margen lateral
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ElevatedButton(
-                style: style,
-                onPressed: () {
-                  //Provider.of<MyAppState>( context, listen: false,).updateIndex(1);
-                  context.read<MyAppState>().updateIndex(1);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => const PageOfPage()),
-                  );
-                },
-                child: const Text('Stock'),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                style: style,
-                onPressed: () {
-                  //Provider.of<MyAppState>(context,listen: false, ).updateIndex(2);
-                  context.read<MyAppState>().updateIndex(2);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => const PageOfPage()),
-                  );
-                },
-                child: const Text('New Input'),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                style: style,
-                onPressed: () {
-                  //Provider.of<MyAppState>(context,listen: false,).updateIndex(3);
-                  context.read<MyAppState>().updateIndex(3);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => const PageOfPage()),
-                  );
-                },
-                child: const Text('Settings'),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                style: style,
-                onPressed: () {
-                  debugPrint("Exit");
-                },
-                child: const Text('Exit'),
-              ),
-            ],
-          ),
+      padding: const EdgeInsets.symmetric(horizontal: 10), // Margen lateral
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ElevatedButton(
+              style: style,
+              onPressed: () {
+                //Provider.of<MyAppState>( context, listen: false,).updateIndex(1);
+                context.read<MyAppState>().updateIndex(1);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const PageOfPage()),
+                );
+              },
+              child: const Text('Stock'),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              style: style,
+              onPressed: () {
+                //Provider.of<MyAppState>(context,listen: false, ).updateIndex(2);
+                context.read<MyAppState>().updateIndex(2);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const PageOfPage()),
+                );
+              },
+              child: const Text('New Input'),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              style: style,
+              onPressed: () {
+                //Provider.of<MyAppState>(context,listen: false,).updateIndex(3);
+                context.read<MyAppState>().updateIndex(3);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const PageOfPage()),
+                );
+              },
+              child: const Text('Settings'),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              style: style,
+              onPressed: () async {
+                final authservice = AuthService();
+                await authservice.signOut();
+
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (_) => const LoginPage()),
+                  (route) => false,
+                );
+              },
+              child: const Text('Exit'),
+            ),
+          ],
         ),
-     
+      ),
     );
   }
 }
