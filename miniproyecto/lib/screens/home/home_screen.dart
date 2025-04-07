@@ -87,17 +87,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
           // Espacio para separar el contenido del footer
           Spacer(), // Esto empuja el footer hacia abajo
+          
           // Footer básico
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            color: Colors.grey[200], // Color de fondo del footer
-            child: Center(
-              child: Text(
-                '© 2025 PharmaStock - Todos los derechos reservados',
-                style: TextStyle(color: Colors.black54, fontSize: 14),
-              ),
-            ),
-          ),
+          // Container(
+          //   padding: EdgeInsets.symmetric(vertical: 10),
+          //   color: Colors.grey[200], // Color de fondo del footer
+          //   child: Center(
+          //     child: Text(
+          //       '© 2025 PharmaStock - Todos los derechos reservados',
+          //       style: TextStyle(color: Colors.black54, fontSize: 14),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
