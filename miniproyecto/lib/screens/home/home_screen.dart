@@ -189,7 +189,7 @@ class ElevatedButtonExample extends StatelessWidget {
                   (route) => false,
                 );
               },
-              child: const Text('Exit'),
+              child: const Text('Cerrar Sesión'),
 
             ),
           ],
