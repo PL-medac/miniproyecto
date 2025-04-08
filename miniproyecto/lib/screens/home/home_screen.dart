@@ -1,4 +1,6 @@
 import 'package:miniproyecto/generated/l10n.dart';
+import 'package:miniproyecto/repository/auth_service.dart';
+import 'package:miniproyecto/screens/login/login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'dashboard_screen.dart';
@@ -36,7 +38,7 @@ class MyApp extends StatelessWidget {
             ],
             supportedLocales: S.delegate.supportedLocales,
             locale: localeProvider.locale,
-            home: const MyHomePage(),
+            home: const LoginPage(),
           );
         },
       ),
@@ -66,6 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF248F8D),
+
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
@@ -104,17 +107,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
           // Espacio para separar el contenido del footer
           Spacer(), // Esto empuja el footer hacia abajo
+          
           // Footer básico
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            color: Colors.grey[200], // Color de fondo del footer
-            child: Center(
-              child: Text(
-                '© 2025 PharmaStock - Todos los derechos reservados',
-                style: TextStyle(color: Colors.black54, fontSize: 14),
-              ),
-            ),
-          ),
+          // Container(
+          //   padding: EdgeInsets.symmetric(vertical: 10),
+          //   color: Colors.grey[200], // Color de fondo del footer
+          //   child: Center(
+          //     child: Text(
+          //       '© 2025 PharmaStock - Todos los derechos reservados',
+          //       style: TextStyle(color: Colors.black54, fontSize: 14),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
@@ -135,7 +139,9 @@ class ElevatedButtonExample extends StatelessWidget {
     );
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+
+      padding: const EdgeInsets.symmetric(horizontal: 10), // Margen lateral
+
       child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -143,6 +149,9 @@ class ElevatedButtonExample extends StatelessWidget {
             ElevatedButton(
               style: style,
               onPressed: () {
+
+                //Provider.of<MyAppState>( context, listen: false,).updateIndex(1);
+
                 context.read<MyAppState>().updateIndex(1);
                 Navigator.push(
                   context,
@@ -155,6 +164,9 @@ class ElevatedButtonExample extends StatelessWidget {
             ElevatedButton(
               style: style,
               onPressed: () {
+
+                //Provider.of<MyAppState>(context,listen: false, ).updateIndex(2);
+
                 context.read<MyAppState>().updateIndex(2);
                 Navigator.push(
                   context,
@@ -167,6 +179,8 @@ class ElevatedButtonExample extends StatelessWidget {
             ElevatedButton(
               style: style,
               onPressed: () {
+                //Provider.of<MyAppState>(context,listen: false,).updateIndex(3);
+
                 context.read<MyAppState>().updateIndex(3);
                 Navigator.push(
                   context,
@@ -178,8 +192,16 @@ class ElevatedButtonExample extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               style: style,
-              onPressed: () {
-                debugPrint("Cerrar Sesión");
+
+              onPressed: () async {
+                final authservice = AuthService();
+                await authservice.signOut();
+
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (_) => const LoginPage()),
+                  (route) => false,
+                );
               },
               child: Text(S.of(context).exit),
             ),
