@@ -1,3 +1,4 @@
+
 import 'package:miniproyecto/generated/l10n.dart';
 import 'package:miniproyecto/repository/auth_service.dart';
 import 'package:miniproyecto/screens/login/login_screen.dart';
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => MyAppState()),
@@ -41,6 +43,7 @@ class MyApp extends StatelessWidget {
             home: const LoginPage(),
           );
         },
+
       ),
     );
   }
@@ -158,7 +161,9 @@ class ElevatedButtonExample extends StatelessWidget {
                   MaterialPageRoute(builder: (_) => const PageOfPage()),
                 );
               },
+
               child: Text(S.of(context).page1),
+
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -173,7 +178,9 @@ class ElevatedButtonExample extends StatelessWidget {
                   MaterialPageRoute(builder: (_) => const PageOfPage()),
                 );
               },
+
               child: Text(S.of(context).page2),
+
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -187,7 +194,9 @@ class ElevatedButtonExample extends StatelessWidget {
                   MaterialPageRoute(builder: (_) => const PageOfPage()),
                 );
               },
+
               child: Text(S.of(context).page3),
+
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -203,7 +212,9 @@ class ElevatedButtonExample extends StatelessWidget {
                   (route) => false,
                 );
               },
+
               child: Text(S.of(context).exit),
+
             ),
           ],
         ),

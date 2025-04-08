@@ -176,14 +176,18 @@ class _PageOfPageState extends State<PageOfPage> {
                       NavigationRailDestination(
                         icon: Icon(Icons.settings, color: Colors.white),
                         label: Text(
+
                           S.of(context).page3,
+
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
                       // NavigationRailDestination(
                       //   icon: Icon(Icons.exit_to_app, color: Colors.white),
                       //   label: Text(
+
                        //   S.of(context).exit,
+
                       //     style: TextStyle(color: Colors.white),
                       //   ),
                       // ),

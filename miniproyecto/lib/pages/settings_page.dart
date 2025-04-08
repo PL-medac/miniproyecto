@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+
 import 'package:miniproyecto/generated/l10n.dart';
 import 'package:miniproyecto/screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
+
+import 'package:miniproyecto/repository/auth_service.dart';
+import 'package:miniproyecto/screens/login/login_screen.dart';
+
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -74,25 +79,38 @@ class _SettingsPageState extends State<SettingsPage> {
             onChangeFunction2,
           ),
           SizedBox(height: 50),
-          Center(
-            child: OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-              onPressed: () {},
-              child: Text(
-                S.of(context).exit,
-                style: TextStyle(
-                  fontSize: 16,
-                  letterSpacing: 2.2,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
+
+          
+         Center(
+  child: OutlinedButton(
+    style: OutlinedButton.styleFrom(
+      padding: const EdgeInsets.symmetric(horizontal: 40),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+    ),
+    onPressed: () async {
+      final authservice = AuthService();
+      await authservice.signOut();
+
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (_) => const LoginPage()),
+        (route) => false,
+      );
+    },
+    child: Text(
+            S.of(context).exit,
+      style: TextStyle(
+        fontSize: 16,
+        letterSpacing: 2.2,
+        color: Colors.black,
+      ),
+    ),
+  ),
+)
+
+
         ],
       ),
     );
