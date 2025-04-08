@@ -205,6 +205,17 @@ class S {
     );
   }
 
+    /// `Already have an account? Sign in.`
+  String get no_login{
+    return Intl.message(
+      'Already have an account? Sign in.',
+      name: 'no_login',
+      desc: '',
+      args: [],
+    );
+  }
+
+
   /// `Name`
   String get name {
     return Intl.message('Name', name: 'name', desc: '', args: []);
@@ -252,7 +263,12 @@ class S {
 
   /// `Sing up`
   String get signup {
-    return Intl.message('Sing up', name: 'signup', desc: '', args: []);
+    return Intl.message('Sign up', name: 'signup', desc: '', args: []);
+  }
+
+    /// `login`
+  String get login {
+    return Intl.message('login', name: 'login', desc: '', args: []);
   }
 
   /// `Account`

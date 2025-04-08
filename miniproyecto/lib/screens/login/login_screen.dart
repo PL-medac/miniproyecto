@@ -81,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 20),
 
                   Text(
-                    "Iniciar sesión",
+                    S.of(context).login,
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
@@ -162,8 +162,8 @@ const SizedBox(height: 30),
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child: const Text(
-                        "Iniciar sesión",
+                      child: Text(
+                       S.of(context).login,
                         style: TextStyle(fontSize: 16),
                       ),
                     ),

@@ -196,7 +196,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child: const Text(
+                      child: Text(
                         S.of(context).signup,
                         style: TextStyle(fontSize: 16),
                       ),
@@ -211,7 +211,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       Navigator.pop(context); // Navigate back to login page
                     },
                     child: Text(
-                      S.of(context).no_signup,
+                      S.of(context).no_login,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         decoration: TextDecoration.underline,

@@ -48,6 +48,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "no_signup": MessageLookupByLibrary.simpleMessage(
       "¿No tienes una cuenta? Regístrate.",
     ),
+     "no_login": MessageLookupByLibrary.simpleMessage(
+      "¿Ya tienes una cuenta? Inicia sesión",
+    ),
     "notif": MessageLookupByLibrary.simpleMessage("Notificaciones"),
     "notmatch": MessageLookupByLibrary.simpleMessage(
       "La contraseña no coincide",
@@ -57,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "page1": MessageLookupByLibrary.simpleMessage("Listado de medicamentos"),
     "page2": MessageLookupByLibrary.simpleMessage("Gestión CRUD"),
     "page3": MessageLookupByLibrary.simpleMessage("Ajustes"),
+     "password": MessageLookupByLibrary.simpleMessage("Contraseña"),
     "passwchange": MessageLookupByLibrary.simpleMessage("Cambiar contraseña"),
     "passwconfirm": MessageLookupByLibrary.simpleMessage(
       "Confirma tu contraseña",
@@ -67,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "registration": MessageLookupByLibrary.simpleMessage("Registro"),
     "save": MessageLookupByLibrary.simpleMessage("Guardar"),
     "signup": MessageLookupByLibrary.simpleMessage("Registrarse"),
+    "login": MessageLookupByLibrary.simpleMessage("Iniciar sesión"),
     "stock": MessageLookupByLibrary.simpleMessage("Stock"),
     "theme": MessageLookupByLibrary.simpleMessage("Modo oscuro"),
   };
