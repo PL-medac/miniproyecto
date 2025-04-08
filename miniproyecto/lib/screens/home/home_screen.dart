@@ -78,7 +78,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
+
       body: ListView(
+
         children: [
           // Espacio arriba del logo
           SizedBox(height: 75),
