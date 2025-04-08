@@ -32,3 +32,28 @@ void main() async {
 
   runApp(MyApp());
 }
+
+// Clase MyApp de home_screen --> main
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_) => MyAppState(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'PharmaStock',
+        theme: ThemeData(
+          primaryColor: Color(0xFF085F63),
+          scaffoldBackgroundColor: Color.fromARGB(255, 240, 245, 249),
+          appBarTheme: AppBarTheme(
+            backgroundColor: Color(0xFF085F63),
+            foregroundColor: Colors.white,
+          ),
+        ),
+        home: const AuthGate(),
+      ),
+    );
+  }
+}

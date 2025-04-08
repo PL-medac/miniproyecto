@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:miniproyecto/main.dart';
 import 'package:miniproyecto/pages/profile_page.dart';
+import 'package:miniproyecto/screens/home/home_screen.dart';
 import 'package:miniproyecto/screens/login/login_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -20,7 +22,7 @@ class AuthGate extends StatelessWidget {
         final session = snapshot.hasData ? snapshot.data!.session : null;
 
         if (session != null) {
-          return const ProfilePage();
+          return const MyHomePage();
         } else {
           return const LoginPage();
         }
