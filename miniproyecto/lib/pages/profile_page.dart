@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:miniproyecto/generated/l10n.dart';
 import 'package:miniproyecto/repository/auth_service.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -19,7 +20,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Perfil"),
+        title:  Text(S.of(context).profile),
         actions: [
           IconButton(onPressed: logout, icon: const Icon(Icons.logout)),
         ],
