@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:miniproyecto/generated/l10n.dart';
 import 'package:miniproyecto/repository/auth_service.dart';
 import 'dart:ui'; // Necesario para el BackdropFilter
 
@@ -27,7 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
     // Validar misma contraseña
     if (password != confirmPassword) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("La contraseña no coincide")),
+         SnackBar(content: Text(S.of(context).notmatch)),
       );
       return;
     }
@@ -47,6 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: Stack(
         children: [
           // Fondo con la imagen desenfocada
@@ -80,7 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   const SizedBox(height: 20),
 
                   Text(
-                    "Registro",
+                     S.of(context).registration,
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
@@ -96,7 +98,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: TextField(
                       controller: _emailController,
                       decoration: InputDecoration(
-                        labelText: "Email",
+                        labelText: S.of(context).email,
                         labelStyle: TextStyle(color: Colors.white), // Etiqueta blanca
                         prefixIcon: Icon(Icons.email_outlined, color: primaryColor),
                         filled: true, // Fondo
@@ -127,7 +129,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       controller: _passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
-                        labelText: "Contraseña",
+                        labelText:  S.of(context).password,
                         labelStyle: TextStyle(color: Colors.white), // Etiqueta blanca
                         prefixIcon: Icon(Icons.lock_outline, color: primaryColor),
                         filled: true, // Fondo
@@ -157,7 +159,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       controller: _confirmPasswordController,
                       obscureText: true,
                       decoration: InputDecoration(
-                        labelText: "Confirmar contraseña",
+                        labelText: S.of(context).passwconfirm,
                         labelStyle: TextStyle(color: Colors.white), // Etiqueta blanca
                         prefixIcon: Icon(Icons.lock_outline, color: primaryColor),
                         filled: true, // Fondo
@@ -194,8 +196,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child: const Text(
-                        "Registrarse",
+                      child: Text(
+                        S.of(context).signup,
                         style: TextStyle(fontSize: 16),
                       ),
                     ),
@@ -209,7 +211,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       Navigator.pop(context); // Navigate back to login page
                     },
                     child: Text(
-                      "¿Ya tienes una cuenta? Inicia sesión",
+                      S.of(context).no_login,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         decoration: TextDecoration.underline,
@@ -219,6 +221,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ],
               ),
+
             ),
           ),
         ],

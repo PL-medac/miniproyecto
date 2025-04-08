@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:miniproyecto/generated/l10n.dart';
 
 class MedicamentosStockPage extends StatelessWidget {
   // Lista de medicamentos con parámetros predefinidos, cargar aqui los medicamentos desde la base de datos
@@ -35,7 +36,7 @@ class MedicamentosStockPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Stock Medicamentos')),
+      appBar: AppBar(title: Text(S.of(context).page1)),
       body: ListView.builder(
         itemCount: medicamentos.length,
         itemBuilder: (context, index) {
@@ -70,14 +71,14 @@ class MedicamentosStockPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Stock: ${medicamentos[index]['stock']}'),
+                        Text('${S.of(context).stock}: ${medicamentos[index]['stock']}'),
                         Text(
-                          'Fecha de Expiración: ${medicamentos[index]['fecha_expiracion']}',
+                          '${S.of(context).expiration_date}: ${medicamentos[index]['fecha_expiracion']}',
                         ),
-                        Text('Precio: ${medicamentos[index]['precio']}'),
-                        Text('Categoría: ${medicamentos[index]['categoria']}'),
+                        Text('${S.of(context).price}: ${medicamentos[index]['precio']}'),
+                        Text('${S.of(context).category}: ${medicamentos[index]['categoria']}'),
                         Text(
-                          'Laboratorio: ${medicamentos[index]['laboratorio']}',
+                          '${S.of(context).laboratory}: ${medicamentos[index]['laboratorio']}',
                         ),
                       ],
                     ),

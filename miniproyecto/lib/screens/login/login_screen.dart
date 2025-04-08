@@ -1,4 +1,5 @@
 
+import 'package:miniproyecto/generated/l10n.dart';
 import 'package:flutter/material.dart'; 
 import 'package:miniproyecto/repository/auth_service.dart';
 import 'package:miniproyecto/pages/register_page.dart';
@@ -80,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 20),
 
                   Text(
-                    "Iniciar sesión",
+                    S.of(context).login,
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
@@ -96,7 +97,7 @@ Container(
   child: TextField(
     controller: _emailController,
     decoration: InputDecoration(
-      labelText: "Email",
+      labelText: S.of(context).email,
       labelStyle: TextStyle(color: Colors.white),  // Etiqueta blanca
       prefixIcon: Icon(Icons.email_outlined, color: primaryColor),
       border: OutlineInputBorder(
@@ -125,7 +126,7 @@ Container(
     controller: _passwordController,
     obscureText: true,
     decoration: InputDecoration(
-      labelText: "Contraseña",
+      labelText: S.of(context).password,
       labelStyle: TextStyle(color: Colors.white),  // Etiqueta blanca
       prefixIcon: Icon(Icons.lock_outline, color: primaryColor),
       border: OutlineInputBorder(
@@ -161,8 +162,8 @@ const SizedBox(height: 30),
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child: const Text(
-                        "Iniciar sesión",
+                      child: Text(
+                       S.of(context).login,
                         style: TextStyle(fontSize: 16),
                       ),
                     ),
@@ -179,7 +180,7 @@ const SizedBox(height: 30),
                       );
                     },
                     child: Text(
-                      "¿No tienes una cuenta? Regístrate",
+                      S.of(context).no_signup,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         decoration: TextDecoration.underline,
@@ -197,3 +198,4 @@ const SizedBox(height: 30),
     );
   }
 }
+

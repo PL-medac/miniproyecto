@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:miniproyecto/generated/l10n.dart';
 
 class DataInputPage extends StatefulWidget {
   const DataInputPage({super.key});
@@ -37,21 +38,25 @@ class _DataInputPage extends State<DataInputPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Nombre del Medicamento
-                _buildTextField(label: "Nombre del medicamento"),
+                _buildTextField(label: S.of(context).name_med),
                 SizedBox(height: 15),
 
                 // Número de Registro
                 _buildTextField(
-                  label: "Número de registro",
+                  label: S.of(context).num_reg,
                   readOnly: true,
-                  hintText: "Nº Registro",
+                  hintText: S.of(context).num_reg,
                 ),
                 SizedBox(height: 15),
 
                 // Categoría
                 _buildDropdown(
-                  label: "Categoría",
-                  items: ["Analgésico", "Antibiótico", "Antiinflamatorio"],
+                  label: S.of(context).category,
+                  items: [
+                    S.of(context).category1,
+                    S.of(context).category2,
+                    S.of(context).category3,
+                  ],
                 ),
                 SizedBox(height: 15),
 
@@ -59,7 +64,7 @@ class _DataInputPage extends State<DataInputPage> {
                 TextFormField(
                   controller: _dateController,
                   decoration: InputDecoration(
-                    labelText: "Fecha de caducidad",
+                    labelText: S.of(context).expiration_date,
                     suffixIcon: Icon(Icons.calendar_today),
                   ),
                   readOnly: true,
@@ -69,7 +74,7 @@ class _DataInputPage extends State<DataInputPage> {
 
                 // Fecha de Creación
                 _buildTextField(
-                  label: "Fecha de creación",
+                  label: S.of(context).creation_date,
                   readOnly: true,
                   hintText: "01/04/2025",
                 ),
@@ -80,7 +85,7 @@ class _DataInputPage extends State<DataInputPage> {
                   children: [
                     Expanded(
                       child: _buildDropdown(
-                        label: "Laboratorio",
+                        label: S.of(context).laboratory,
                         items: ["Lab A", "Lab B", "Lab C"],
                       ),
                     ),
@@ -98,12 +103,15 @@ class _DataInputPage extends State<DataInputPage> {
                 Row(
                   children: [
                     Expanded(
-                      child: _buildTextField(label: "CIF", readOnly: true),
+                      child: _buildTextField(
+                        label: S.of(context).cif,
+                        readOnly: true,
+                      ),
                     ),
                     SizedBox(width: 10),
                     Expanded(
                       child: _buildTextField(
-                        label: "Dirección",
+                        label: S.of(context).address,
                         readOnly: true,
                       ),
                     ),
@@ -114,9 +122,13 @@ class _DataInputPage extends State<DataInputPage> {
                 // Precio y Stock
                 Row(
                   children: [
-                    Expanded(child: _buildTextField(label: "Precio")),
+                    Expanded(
+                      child: _buildTextField(label: S.of(context).price),
+                    ),
                     SizedBox(width: 10),
-                    Expanded(child: _buildTextField(label: "Stock")),
+                    Expanded(
+                      child: _buildTextField(label: S.of(context).stock),
+                    ),
                   ],
                 ),
                 SizedBox(height: 15),
@@ -126,7 +138,7 @@ class _DataInputPage extends State<DataInputPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      'Imagen',
+                      S.of(context).image,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -151,13 +163,25 @@ class _DataInputPage extends State<DataInputPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    _buildButton(label: "Nuevo", color: Color(0xFF494949)),
+                    _buildButton(
+                      label: S.of(context).nuevo,
+                      color: Color(0xFF494949),
+                    ),
                     SizedBox(width: 10),
-                    _buildButton(label: "Editar", color: Color(0xFF494949)),
+                    _buildButton(
+                      label: S.of(context).edit,
+                      color: Color(0xFF494949),
+                    ),
                     SizedBox(width: 10),
-                    _buildButton(label: "Guardar", color: Color(0xFF494949)),
+                    _buildButton(
+                      label: S.of(context).save,
+                      color: Color(0xFF494949),
+                    ),
                     SizedBox(width: 10),
-                    _buildButton(label: "Borrar", color: Color(0xFF494949)),
+                    _buildButton(
+                      label: S.of(context).delete,
+                      color: Color(0xFF494949),
+                    ),
                   ],
                 ),
               ],
