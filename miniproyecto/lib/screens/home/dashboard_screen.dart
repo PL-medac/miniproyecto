@@ -179,13 +179,13 @@ class _PageOfPageState extends State<PageOfPage> {
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
-                      NavigationRailDestination(
-                        icon: Icon(Icons.exit_to_app, color: Colors.white),
-                        label: Text(
-                          'Cerrar Sesión',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
+                      // NavigationRailDestination(
+                      //   icon: Icon(Icons.exit_to_app, color: Colors.white),
+                      //   label: Text(
+                      //     'Cerrar Sesión',
+                      //     style: TextStyle(color: Colors.white),
+                      //   ),
+                      // ),
                     ],
                     selectedIndex: selectedIndex,
 
