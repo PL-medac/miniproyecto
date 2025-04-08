@@ -1,26 +1,44 @@
+import 'package:miniproyecto/generated/l10n.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'dashboard_screen.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => MyAppState(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'PharmaStock',
-        theme: ThemeData(
-          primaryColor: Color(0xFF085F63),
-          scaffoldBackgroundColor: Color.fromARGB(255, 240, 245, 249),
-          appBarTheme: AppBarTheme(
-            backgroundColor: Color(0xFF085F63),
-            foregroundColor: Colors.white,
-          ),
-        ),
-        home: const MyHomePage(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => MyAppState()),
+        ChangeNotifierProvider(create: (_) => LocaleProvider()),
+      ],
+      child: Consumer<LocaleProvider>(
+        builder: (context, localeProvider, _) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'PharmaStock',
+            theme: ThemeData(
+              primaryColor: Color(0xFF085F63),
+              scaffoldBackgroundColor: Color.fromARGB(255, 240, 245, 249),
+              appBarTheme: AppBarTheme(
+                backgroundColor: Color(0xFF085F63),
+                foregroundColor: Colors.white,
+              ),
+            ),
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
+            locale: localeProvider.locale,
+            home: const MyHomePage(),
+          );
+        },
       ),
     );
   }
@@ -80,6 +98,8 @@ class _MyHomePageState extends State<MyHomePage> {
           // Botones de navegación
           ElevatedButtonExample(),
 
+          SizedBox(height: 75),
+
           // Espacio para separar el contenido del footer
           Spacer(), // Esto empuja el footer hacia abajo
           // Footer básico
@@ -127,7 +147,7 @@ class ElevatedButtonExample extends StatelessWidget {
                   MaterialPageRoute(builder: (_) => const PageOfPage()),
                 );
               },
-              child: const Text('Listado Medicamentos'),
+              child: Text(S.of(context).page1),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -139,7 +159,7 @@ class ElevatedButtonExample extends StatelessWidget {
                   MaterialPageRoute(builder: (_) => const PageOfPage()),
                 );
               },
-              child: const Text('Gestión CRUD'),
+              child: Text(S.of(context).page2),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -151,7 +171,7 @@ class ElevatedButtonExample extends StatelessWidget {
                   MaterialPageRoute(builder: (_) => const PageOfPage()),
                 );
               },
-              child: const Text('Ajustes'),
+              child: Text(S.of(context).page3),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -159,11 +179,33 @@ class ElevatedButtonExample extends StatelessWidget {
               onPressed: () {
                 debugPrint("Cerrar Sesión");
               },
-              child: const Text('Cerrar Sesión'),
+              child: Text(S.of(context).exit),
             ),
           ],
         ),
       ),
     );
+  }
+}
+
+class LocaleProvider with ChangeNotifier {
+  Locale _locale = const Locale('es'); // idioma por defecto
+  Locale get locale => _locale;
+  LocaleProvider() {
+    _loadLocale(); // cargar idioma guardado
+  }
+  Future<void> _loadLocale() async {
+    final prefs = await SharedPreferences.getInstance();
+    final code = prefs.getString('localeCoder') ?? 'es';
+    _locale = Locale(code);
+    notifyListeners();
+  }
+
+  Future<void> setLocale(Locale locale) async {
+    if (!['es', 'en'].contains(locale.languageCode)) return;
+    _locale = locale;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('localeCode', locale.languageCode);
+    notifyListeners();
   }
 }

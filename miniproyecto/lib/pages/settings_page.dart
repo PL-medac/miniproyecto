@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:miniproyecto/generated/l10n.dart';
+import 'package:miniproyecto/screens/home/home_screen.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -36,7 +39,7 @@ class _SettingsPageState extends State<SettingsPage> {
               Icon(Icons.account_circle_sharp),
               SizedBox(width: 10),
               Text(
-                "Cuenta",
+                S.of(context).account,
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
             ],
@@ -44,25 +47,29 @@ class _SettingsPageState extends State<SettingsPage> {
 
           Divider(height: 20, thickness: 1),
           SizedBox(height: 10),
-          buildAccountOption(context, "Cambiar contraseña"),
-          buildAccountOption(context, "Idioma"),
-          buildAccountOption(context, "Privacidad y seguridad"),
+          buildAccountOption(context, S.of(context).passwchange),
+          buildAccountOption(context, S.of(context).language),
+          buildAccountOption(context, S.of(context).privacy),
           SizedBox(height: 40),
           Row(
             children: [
               Icon(Icons.volume_up_rounded),
               SizedBox(width: 10),
               Text(
-                "Notificaciones",
+                S.of(context).notif,
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
             ],
           ),
           Divider(height: 20, thickness: 1),
           SizedBox(height: 10),
-          buildNotificationOption("Modo claro/oscuro", valNotify1, onChangeFunction1),
           buildNotificationOption(
-            "Notificaciones activas",
+            S.of(context).theme,
+            valNotify1,
+            onChangeFunction1,
+          ),
+          buildNotificationOption(
+            S.of(context).act_notif,
             valNotify2,
             onChangeFunction2,
           ),
@@ -77,7 +84,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               onPressed: () {},
               child: Text(
-                "Cerrar sesión",
+                S.of(context).exit,
                 style: TextStyle(
                   fontSize: 16,
                   letterSpacing: 2.2,
@@ -126,27 +133,64 @@ class _SettingsPageState extends State<SettingsPage> {
   GestureDetector buildAccountOption(BuildContext context, String title) {
     return GestureDetector(
       onTap: () {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text(title),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [Text("Option 1"), Text("Option 2")],
+  if (title == S.of(context).language) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(S.of(context).language),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                title: Text("Español"),
+                onTap: () {
+                  context.read<LocaleProvider>().setLocale(Locale('es'));
+                  Navigator.of(context).pop();
+                },
               ),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text("Close"),
-                ),
-              ],
-            );
-          },
+              ListTile(
+                title: Text("English"),
+                onTap: () {
+                  context.read<LocaleProvider>().setLocale(Locale('en'));
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+          actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text(S.of(context).close),
+              ),
+            ],
+          );
+      },
+    );
+  } else {
+    // comportamiento normal para otras opciones
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [Text("Option 1"), Text("Option 2")],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(S.of(context).close),
+            ),
+          ],
         );
       },
+    );
+  }
+},
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
         child: Row(

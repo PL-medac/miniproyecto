@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:miniproyecto/generated/l10n.dart';
 import 'package:miniproyecto/repository/auth_service.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -23,7 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
     // Validar misma contraseña
     if (password != confirmPassword) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("La contraseña no coincide")),
+         SnackBar(content: Text(S.of(context).notmatch)),
       );
       return;
     }
@@ -44,28 +45,28 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Registro")),
+      appBar: AppBar(title:  Text(S.of(context).registration)),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 50),
         children: [
           TextField(
             controller: _emailController,
-            decoration: const InputDecoration(labelText: "Email"),
+            decoration:  InputDecoration(labelText: S.of(context).email),
           ), // Email
 
           TextField(
             controller: _passwordController,
-            decoration: const InputDecoration(labelText: "Contraseña"),
+            decoration:  InputDecoration(labelText: S.of(context).password),
           ), // Password
 
           TextField(
             controller: _confirmPasswordController,
-            decoration: const InputDecoration(
-              labelText: "Confirmar contraseña",
+            decoration:  InputDecoration(
+              labelText: S.of(context).passwconfirm,
             ),
           ), // Confirm Password
 
-          ElevatedButton(onPressed: singUp, child: const Text("Registrarse")),
+          ElevatedButton(onPressed: singUp, child:  Text( S.of(context).signup)),
 
           // Register Page link
           GestureDetector(
@@ -74,8 +75,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   context,
                   MaterialPageRoute(builder: (context) => const RegisterPage()),
                 ),
-            child: const Center(
-              child: Text("¿No tienes una cuenta? Registrate"),
+            child: Center(
+              child: Text(S.of(context).no_signup),
             ),
           ),
         ],

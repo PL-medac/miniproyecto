@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:miniproyecto/generated/l10n.dart';
 import 'package:miniproyecto/screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
 import '../../pages/medicamentos_page.dart';
@@ -82,26 +83,26 @@ class _PageOfPageState extends State<PageOfPage> {
                     items: [
                       BottomNavigationBarItem(
                         icon: Icon(Icons.home, color: Colors.white),
-                        label: 'Inicio',
+                        label: S.of(context).home,
                       ),
                       BottomNavigationBarItem(
                         icon: Icon(
                           Icons.assessment_outlined,
                           color: Colors.white,
                         ),
-                        label: 'Listado Medicamentos',
+                        label: S.of(context).page1,
                       ),
                       BottomNavigationBarItem(
                         icon: Icon(Icons.add_box_outlined, color: Colors.white),
-                        label: 'Gestión CRUD',
+                        label: S.of(context).page2,
                       ),
                       BottomNavigationBarItem(
                         icon: Icon(Icons.settings, color: Colors.white),
-                        label: 'Ajustes',
+                        label: S.of(context).page3,
                       ),
                       BottomNavigationBarItem(
                         icon: Icon(Icons.exit_to_app, color: Colors.white),
-                        label: 'Cerrar Sesión',
+                        label: S.of(context).exit,
                       ),
                     ],
                     currentIndex: selectedIndex,
@@ -151,7 +152,7 @@ class _PageOfPageState extends State<PageOfPage> {
                       NavigationRailDestination(
                         icon: Icon(Icons.home, color: Colors.white),
                         label: Text(
-                          'Inicio',
+                          S.of(context).home,
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -161,28 +162,28 @@ class _PageOfPageState extends State<PageOfPage> {
                           color: Colors.white,
                         ),
                         label: Text(
-                          'Listado Medicamentos',
+                          S.of(context).page1,
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
                       NavigationRailDestination(
                         icon: Icon(Icons.add_box_outlined, color: Colors.white),
                         label: Text(
-                          'Gestión CRUD',
+                          S.of(context).page2,
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
                       NavigationRailDestination(
                         icon: Icon(Icons.settings, color: Colors.white),
                         label: Text(
-                          'Ajustes',
+                          S.of(context).page3,
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
                       NavigationRailDestination(
                         icon: Icon(Icons.exit_to_app, color: Colors.white),
                         label: Text(
-                          'Cerrar Sesión',
+                          S.of(context).exit,
                           style: TextStyle(color: Colors.white),
                         ),
                       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:miniproyecto/generated/l10n.dart';
 import 'package:miniproyecto/repository/auth_service.dart';
 import 'package:miniproyecto/pages/register_page.dart';
 
@@ -44,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
 
           TextField(
             controller: _passwordController,
-            decoration: const InputDecoration(labelText: "Contraseña"),
+            decoration:  InputDecoration(labelText: S.of(context).password),
           ),
 
           ElevatedButton(onPressed: login, child: const Text("Login")),
@@ -56,8 +57,8 @@ class _LoginPageState extends State<LoginPage> {
                   context,
                   MaterialPageRoute(builder: (context) => const RegisterPage()),
                 ),
-            child: const Center(
-              child: Text("¿No tienes una cuenta? Registrate"),
+            child: Center(
+              child: Text(S.of(context).no_signup),
             ),
           ),
         ],
