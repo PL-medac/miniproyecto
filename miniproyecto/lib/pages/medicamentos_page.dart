@@ -30,7 +30,6 @@ class _MedicamentosStockPageState extends State<MedicamentosStockPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(S.of(context).page1)),
       body:
           isLoading
               ? const Center(child: CircularProgressIndicator())
