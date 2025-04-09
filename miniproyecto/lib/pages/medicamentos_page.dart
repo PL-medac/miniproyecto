@@ -44,47 +44,41 @@ class _MedicamentosStockPageState extends State<MedicamentosStockPage> {
                       contentPadding: const EdgeInsets.all(
                         10,
                       ), // Espaciado alrededor del contenido
-                      leading:Icon(
-                                Icons.medical_services,
-                                size: 100, // Ajusta el tamaño del ícono
-                              ),
-                              title : Text(
-                              /*Image.asset(
-                                medicamentos[index]['imagen']!,
-                                height: 100, // Ajusta la altura de la imagen
-                                width: 100, // Ajusta el ancho de la imagen
-                              ),*/
-                              item['name']?? 'Sin nombre',
-                              style: const TextStyle(
-                                fontSize: 22, // Tamaño de fuente más grande
-                                fontWeight: FontWeight.bold, // Texto en negrita
-                              ),
+                      leading: Image.network(
+                        medicamentos[index]['image_url']!,
+                        height: 100, // Ajusta la altura de la imagen
+                        width: 100, // Ajusta el ancho de la imagen
+                      ),
+
+                      title: Text(
+                        item['name'] ?? 'Sin nombre',
+                        style: const TextStyle(
+                          fontSize: 22, // Tamaño de fuente más grande
+                          fontWeight: FontWeight.bold, // Texto en negrita
+                        ),
                       ),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          
-                                Text(
-                                  '${S.of(context).stock}: ${medicamentos[index]['stock']}',
-                                ),
-                                Text(
-                                  '${S.of(context).expiration_date}: ${medicamentos[index]['expiration_date']}',
-                                ),
-                                Text(
-                                  '${S.of(context).price}: ${medicamentos[index]['price']}',
-                                ),
-                                Text(
-                                  '${S.of(context).category}: ${medicamentos[index]['id_category']}',
-                                ),
-                                Text(
-                                  '${S.of(context).laboratory}: ${medicamentos[index]['id_laboratory']}',
-                                ),
-                              ],
-                            ),
+                          Text(
+                            '${S.of(context).stock}: ${medicamentos[index]['stock']}',
                           ),
-                        
-                      );
-                    
+                          Text(
+                            '${S.of(context).expiration_date}: ${medicamentos[index]['expiration_date']}',
+                          ),
+                          Text(
+                            '${S.of(context).price}: ${medicamentos[index]['price']}',
+                          ),
+                          Text(
+                            '${S.of(context).category}: ${medicamentos[index]['id_category']}',
+                          ),
+                          Text(
+                            '${S.of(context).laboratory}: ${medicamentos[index]['id_laboratory']}',
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
                 },
               ),
     );
