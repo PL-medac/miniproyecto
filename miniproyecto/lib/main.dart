@@ -10,9 +10,9 @@ import 'screens/login/login_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); //para asegurar q flutter esté correctamente inicializado
 
-  await dotenv.load(
+  await dotenv.load( //carga var entorno desde .env (para info sensible)
     fileName: ".env",
-  ); //caga var entorno desde .env (para info sensible)
+  ); 
 
   final supabaseUrl = dotenv.env['SUPABASE_URL'] ?? ''; //URL
   final supabaseAnonKey =
