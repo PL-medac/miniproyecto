@@ -69,6 +69,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "signup": MessageLookupByLibrary.simpleMessage("Sign up"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "stock": MessageLookupByLibrary.simpleMessage("Stock"),
-    "theme": MessageLookupByLibrary.simpleMessage("Dark Theme"),
+    "theme": MessageLookupByLibrary.simpleMessage("Dark Mode"),
   };
 }

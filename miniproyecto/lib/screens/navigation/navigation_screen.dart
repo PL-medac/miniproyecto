@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:miniproyecto/generated/l10n.dart';
 import 'package:miniproyecto/screens/home/home_screen.dart';
@@ -17,10 +16,11 @@ class _PageOfPageState extends State<PageOfPage> {
   @override
   Widget build(BuildContext context) {
     var selectedIndex = Provider.of<MyAppState>(context).selectedIndex;
+    var brightness = Theme.of(context).brightness; // Detecta el modo de tema
 
     Widget page;
     switch (selectedIndex) {
-      case 0: //home. Se agrega un valor váliso para evitar error
+      case 0: //home. Se agrega un valor válido para evitar error
         page = Container(); // ⬅️ No mostramos ninguna pantalla aquí
         break;
       case 1: //crud
@@ -40,9 +40,12 @@ class _PageOfPageState extends State<PageOfPage> {
         throw UnimplementedError('no widget for $selectedIndex');
     }
 
-    // Para el fondo de pantalla y el cambio de pestañas:
+    // Fondo principal que cambia dependiendo del tema
     var mainArea = ColoredBox(
-      color: Color.fromARGB(255, 238, 248, 246),
+      color:
+          brightness == Brightness.dark
+              ? Colors.black
+              : Color.fromARGB(255, 238, 248, 246), // Fondo oscuro o claro
       child: AnimatedSwitcher(
         duration: Duration(milliseconds: 200),
         child: page,
@@ -51,13 +54,14 @@ class _PageOfPageState extends State<PageOfPage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF248F8D), // Nuevo color aplicado
-
+        backgroundColor:
+            brightness == Brightness.dark
+                ? const Color(0xFF1E1E1E) // Cambia según el tema
+                : Color(0xFF248F8D), // Cambia según el tema
         title: Image.asset(
           "assets/logo.png", // Ruta de la imagen en assets
           height: 50, // Ajusta el tamaño según sea necesario
         ),
-
         centerTitle: true,
         actions: [
           Padding(
@@ -66,7 +70,18 @@ class _PageOfPageState extends State<PageOfPage> {
               onPressed: () {
                 debugPrint("Notificaciones");
               },
-              icon: Icon(Icons.email),
+              icon: Icon(
+                Icons.email,
+                color:
+                    brightness == Brightness.dark
+                        ? Colors.white
+                        : const Color.fromARGB(
+                          255,
+                          255,
+                          255,
+                          255,
+                        ), // Ícono acorde al tema
+              ),
             ),
           ),
         ],
@@ -79,35 +94,68 @@ class _PageOfPageState extends State<PageOfPage> {
                 Expanded(child: mainArea),
                 SafeArea(
                   child: BottomNavigationBar(
-                    backgroundColor: Color(0xFF494949),
+                    backgroundColor:
+                        brightness == Brightness.dark
+                            ? Colors.black
+                            : Color(0xFF494949),
                     items: [
                       BottomNavigationBarItem(
-                        icon: Icon(Icons.home, color: Colors.white),
+                        icon: Icon(
+                          Icons.home,
+                          color:
+                              brightness == Brightness.dark
+                                  ? Colors.white
+                                  : Colors.black,
+                        ),
                         label: S.of(context).home,
                       ),
                       BottomNavigationBarItem(
                         icon: Icon(
                           Icons.assessment_outlined,
-                          color: Colors.white,
+                          color:
+                              brightness == Brightness.dark
+                                  ? Colors.white
+                                  : Colors.black,
                         ),
                         label: S.of(context).page1,
                       ),
                       BottomNavigationBarItem(
-                        icon: Icon(Icons.add_box_outlined, color: Colors.white),
+                        icon: Icon(
+                          Icons.add_box_outlined,
+                          color:
+                              brightness == Brightness.dark
+                                  ? Colors.white
+                                  : Colors.black,
+                        ),
                         label: S.of(context).page2,
                       ),
                       BottomNavigationBarItem(
-                        icon: Icon(Icons.settings, color: Colors.white),
+                        icon: Icon(
+                          Icons.settings,
+                          color:
+                              brightness == Brightness.dark
+                                  ? Colors.white
+                                  : Colors.black,
+                        ),
                         label: S.of(context).page3,
                       ),
                       BottomNavigationBarItem(
-                        icon: Icon(Icons.exit_to_app, color: Colors.white),
+                        icon: Icon(
+                          Icons.exit_to_app,
+                          color:
+                              brightness == Brightness.dark
+                                  ? Colors.white
+                                  : Colors.black,
+                        ),
                         label: S.of(context).exit,
                       ),
                     ],
                     currentIndex: selectedIndex,
                     selectedItemColor: Color.fromARGB(255, 7, 219, 194),
-                    unselectedItemColor: Colors.white,
+                    unselectedItemColor:
+                        brightness == Brightness.dark
+                            ? Colors.white
+                            : Colors.black,
 
                     onTap: (selectedIndex) {
                       final myAppState = Provider.of<MyAppState>(
@@ -146,51 +194,85 @@ class _PageOfPageState extends State<PageOfPage> {
               children: [
                 SafeArea(
                   child: NavigationRail(
-                    backgroundColor: Color(0xFF494949),
+                    backgroundColor:
+                        brightness == Brightness.dark
+                            ? Color(0xFF121214)
+                            : Color(0xFF93C8BF), // Cambiado por el nuevo color
+
                     extended: constraints.maxWidth >= 600,
                     destinations: [
                       NavigationRailDestination(
-                        icon: Icon(Icons.home, color: Colors.white),
+                        icon: Icon(
+                          Icons.home,
+                          color:
+                              brightness == Brightness.dark
+                                  ? Colors.white
+                                  : Colors.black,
+                        ),
                         label: Text(
                           S.of(context).home,
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                            color:
+                                brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
+                          ),
                         ),
                       ),
                       NavigationRailDestination(
                         icon: Icon(
                           Icons.assessment_outlined,
-                          color: Colors.white,
+                          color:
+                              brightness == Brightness.dark
+                                  ? Colors.white
+                                  : Colors.black,
                         ),
                         label: Text(
                           S.of(context).page1,
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                            color:
+                                brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
+                          ),
                         ),
                       ),
                       NavigationRailDestination(
-                        icon: Icon(Icons.add_box_outlined, color: Colors.white),
+                        icon: Icon(
+                          Icons.add_box_outlined,
+                          color:
+                              brightness == Brightness.dark
+                                  ? Colors.white
+                                  : Colors.black,
+                        ),
                         label: Text(
                           S.of(context).page2,
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                            color:
+                                brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
+                          ),
                         ),
                       ),
                       NavigationRailDestination(
-                        icon: Icon(Icons.settings, color: Colors.white),
+                        icon: Icon(
+                          Icons.settings,
+                          color:
+                              brightness == Brightness.dark
+                                  ? Colors.white
+                                  : Colors.black,
+                        ),
                         label: Text(
-
                           S.of(context).page3,
-
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                            color:
+                                brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
+                          ),
                         ),
                       ),
-                      // NavigationRailDestination(
-                      //   icon: Icon(Icons.exit_to_app, color: Colors.white),
-                      //   label: Text(
-
-                       //   S.of(context).exit,
-
-                      //     style: TextStyle(color: Colors.white),
-                      //   ),
-                      // ),
                     ],
                     selectedIndex: selectedIndex,
 

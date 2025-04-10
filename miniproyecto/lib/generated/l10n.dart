@@ -306,9 +306,9 @@ class S {
     return Intl.message('Notifications', name: 'notif', desc: '', args: []);
   }
 
-  /// `Dark Theme`
+  /// `Dark Mode`
   String get theme {
-    return Intl.message('Dark Theme', name: 'theme', desc: '', args: []);
+    return Intl.message('Dark Mode', name: 'theme', desc: '', args: []);
   }
 
   /// `Active notifications`

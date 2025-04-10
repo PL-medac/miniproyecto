@@ -1,37 +1,32 @@
-
 import 'package:miniproyecto/generated/l10n.dart';
 import 'package:miniproyecto/repository/auth_service.dart';
-import 'package:miniproyecto/screens/login/login_screen.dart';
+import 'package:miniproyecto/screens/auth/login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'dashboard_screen.dart';
+import '../navigation/navigation_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:miniproyecto/providers/theme_provider.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => MyAppState()),
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => LocaleProvider()),
       ],
-      child: Consumer<LocaleProvider>(
-        builder: (context, localeProvider, _) {
+      child: Consumer2<LocaleProvider, ThemeProvider>(
+        builder: (context, localeProvider, themeProvider, _) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'PharmaStock',
-            theme: ThemeData(
-              primaryColor: Color(0xFF085F63),
-              scaffoldBackgroundColor: Color.fromARGB(255, 240, 245, 249),
-              appBarTheme: AppBarTheme(
-                backgroundColor: Color(0xFF085F63),
-                foregroundColor: Colors.white,
-              ),
-            ),
+            theme: themeProvider.lightTheme,
+            darkTheme: themeProvider.darkTheme,
+            themeMode: themeProvider.themeMode, // Establece el modo de tema
             localizationsDelegates: const [
               S.delegate,
               GlobalMaterialLocalizations.delegate,
@@ -40,10 +35,9 @@ class MyApp extends StatelessWidget {
             ],
             supportedLocales: S.delegate.supportedLocales,
             locale: localeProvider.locale,
-            home: const LoginPage(),
+            home: const MyHomePage(),
           );
         },
-
       ),
     );
   }
@@ -70,7 +64,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF248F8D),
+        backgroundColor:
+            Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
+                ? const Color(0xFF1E1E1E) // Color para modo oscuro
+                : const Color(0xFF248F8D), // Color para modo claro
 
         actions: [
           Padding(
@@ -86,7 +83,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
 
       body: ListView(
-
         children: [
           // Espacio arriba del logo
           SizedBox(height: 75),
@@ -95,7 +91,9 @@ class _MyHomePageState extends State<MyHomePage> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
             child: Image.asset(
-              "assets/portada.png", // Ruta de la imagen en assets
+              Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
+                  ? "assets/logo.png" // Ruta de la imagen para modo oscuro
+                  : "assets/portada.png", // Ruta de la imagen para modo claro
               height: 200, // Ajusta el tamaño del logo según sea necesario
             ),
           ),
@@ -107,21 +105,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ElevatedButtonExample(),
 
           SizedBox(height: 75),
-
-          // Espacio para separar el contenido del footer
-          Spacer(), // Esto empuja el footer hacia abajo
-          
-          // Footer básico
-          // Container(
-          //   padding: EdgeInsets.symmetric(vertical: 10),
-          //   color: Colors.grey[200], // Color de fondo del footer
-          //   child: Center(
-          //     child: Text(
-          //       '© 2025 PharmaStock - Todos los derechos reservados',
-          //       style: TextStyle(color: Colors.black54, fontSize: 14),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
@@ -134,7 +117,10 @@ class ElevatedButtonExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ButtonStyle style = ElevatedButton.styleFrom(
-      backgroundColor: const Color.fromARGB(255, 23, 109, 97),
+      backgroundColor:
+          Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
+              ? const Color.fromARGB(255, 68, 51, 67) // Color para modo oscuro
+              : const Color.fromARGB(255, 23, 109, 97), // Color para modo claro
       foregroundColor: Colors.white,
       textStyle: const TextStyle(fontSize: 18),
       minimumSize: const Size(400, 60),
@@ -142,7 +128,6 @@ class ElevatedButtonExample extends StatelessWidget {
     );
 
     return Padding(
-
       padding: const EdgeInsets.symmetric(horizontal: 10), // Margen lateral
 
       child: Center(
@@ -152,7 +137,6 @@ class ElevatedButtonExample extends StatelessWidget {
             ElevatedButton(
               style: style,
               onPressed: () {
-
                 //Provider.of<MyAppState>( context, listen: false,).updateIndex(1);
 
                 context.read<MyAppState>().updateIndex(1);
@@ -163,13 +147,11 @@ class ElevatedButtonExample extends StatelessWidget {
               },
 
               child: Text(S.of(context).page1),
-
             ),
             const SizedBox(height: 20),
             ElevatedButton(
               style: style,
               onPressed: () {
-
                 //Provider.of<MyAppState>(context,listen: false, ).updateIndex(2);
 
                 context.read<MyAppState>().updateIndex(2);
@@ -180,7 +162,6 @@ class ElevatedButtonExample extends StatelessWidget {
               },
 
               child: Text(S.of(context).page2),
-
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -196,7 +177,6 @@ class ElevatedButtonExample extends StatelessWidget {
               },
 
               child: Text(S.of(context).page3),
-
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -214,7 +194,6 @@ class ElevatedButtonExample extends StatelessWidget {
               },
 
               child: Text(S.of(context).exit),
-
             ),
           ],
         ),

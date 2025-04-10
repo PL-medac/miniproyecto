@@ -3,7 +3,6 @@ import 'package:miniproyecto/generated/l10n.dart';
 import 'package:miniproyecto/repository/auth_service.dart';
 import 'dart:ui'; // Necesario para el BackdropFilter
 
-
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -17,8 +16,14 @@ class _RegisterPageState extends State<RegisterPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-
-  final Color primaryColor = const Color(0xFF248F8D);
+  
+ // Colores definidos para modo claro y oscuro
+  Color get primaryColor {
+    final theme = Theme.of(context);
+    return theme.brightness == Brightness.dark
+        ? const Color.fromARGB(255, 116, 67, 112)  // Color para modo oscuro
+        : const Color(0xFF248F8D);  // Color para modo claro (puedes cambiarlo a otro color)
+  }
 
   void singUp() async {
     final email = _emailController.text.trim();
@@ -27,9 +32,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
     // Validar misma contraseña
     if (password != confirmPassword) {
-      ScaffoldMessenger.of(context).showSnackBar(
-         SnackBar(content: Text(S.of(context).notmatch)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(S.of(context).notmatch)));
       return;
     }
 
@@ -48,11 +53,10 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Stack(
         children: [
           // Fondo con la imagen desenfocada
-           // Imagen de fondo desenfocada
+          // Imagen de fondo desenfocada
           Positioned.fill(
             child: Image.asset(
               'assets/fondo.png', // Asegúrate de tener la imagen en assets
@@ -63,7 +67,9 @@ class _RegisterPageState extends State<RegisterPage> {
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 7.0, sigmaY: 7.0), // Desenfoque
               child: Container(
-                color: Colors.black.withOpacity(0.7), // Opacidad para mejorar contraste
+                color: Colors.black.withOpacity(
+                  0.8,
+                ), // Opacidad para mejorar contraste
               ),
             ),
           ),
@@ -75,21 +81,29 @@ class _RegisterPageState extends State<RegisterPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // Logo
-                  Image.asset(
-                    'assets/portada.png',
+                    Image.asset(
+                    Theme.of(context).brightness == Brightness.dark
+                      ? 'assets/logo.png' // Imagen para modo oscuro
+                      : 'assets/portada.png', // Imagen para modo claro
                     height: 120,
-                  ),
+                    ),
                   const SizedBox(height: 20),
-
-                  Text(
-                     S.of(context).registration,
+                    Text(
+                    S.of(context).registration,
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: primaryColor,
+                      shadows: [
+                      Shadow(
+                        offset: Offset(2.0, 2.0), // Slight offset
+                        blurRadius: 4.0, // Blur effect
+                        color: Colors.black, // Black shadow
+                      ),
+                      ],
                     ),
                     textAlign: TextAlign.center,
-                  ),
+                    ),
                   const SizedBox(height: 40),
 
                   // Email input
@@ -99,21 +113,32 @@ class _RegisterPageState extends State<RegisterPage> {
                       controller: _emailController,
                       decoration: InputDecoration(
                         labelText: S.of(context).email,
-                        labelStyle: TextStyle(color: Colors.white), // Etiqueta blanca
-                        prefixIcon: Icon(Icons.email_outlined, color: primaryColor),
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                        ), // Etiqueta blanca
+                        prefixIcon: Icon(
+                          Icons.email_outlined,
+                          color: primaryColor,
+                        ),
                         filled: true, // Fondo
                         fillColor: Colors.transparent, // Fondo transparente
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.white), // Borde blanco
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ), // Borde blanco
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.white), // Borde blanco
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ), // Borde blanco
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: primaryColor), // Borde color primario
+                          borderSide: BorderSide(
+                            color: primaryColor,
+                          ), // Borde color primario
                         ),
                       ),
                       style: TextStyle(color: Colors.white), // Texto blanco
@@ -129,22 +154,33 @@ class _RegisterPageState extends State<RegisterPage> {
                       controller: _passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
-                        labelText:  S.of(context).password,
-                        labelStyle: TextStyle(color: Colors.white), // Etiqueta blanca
-                        prefixIcon: Icon(Icons.lock_outline, color: primaryColor),
+                        labelText: S.of(context).password,
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                        ), // Etiqueta blanca
+                        prefixIcon: Icon(
+                          Icons.lock_outline,
+                          color: primaryColor,
+                        ),
                         filled: true, // Fondo
                         fillColor: Colors.transparent, // Fondo transparente
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.white), // Borde blanco
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ), // Borde blanco
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.white), // Borde blanco
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ), // Borde blanco
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: primaryColor), // Borde color primario
+                          borderSide: BorderSide(
+                            color: primaryColor,
+                          ), // Borde color primario
                         ),
                       ),
                       style: TextStyle(color: Colors.white), // Texto blanco
@@ -160,21 +196,32 @@ class _RegisterPageState extends State<RegisterPage> {
                       obscureText: true,
                       decoration: InputDecoration(
                         labelText: S.of(context).passwconfirm,
-                        labelStyle: TextStyle(color: Colors.white), // Etiqueta blanca
-                        prefixIcon: Icon(Icons.lock_outline, color: primaryColor),
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                        ), // Etiqueta blanca
+                        prefixIcon: Icon(
+                          Icons.lock_outline,
+                          color: primaryColor,
+                        ),
                         filled: true, // Fondo
                         fillColor: Colors.transparent, // Fondo transparente
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.white), // Borde blanco
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ), // Borde blanco
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.white), // Borde blanco
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ), // Borde blanco
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: primaryColor), // Borde color primario
+                          borderSide: BorderSide(
+                            color: primaryColor,
+                          ), // Borde color primario
                         ),
                       ),
                       style: TextStyle(color: Colors.white), // Texto blanco
@@ -185,28 +232,32 @@ class _RegisterPageState extends State<RegisterPage> {
                   // Register button
                   Container(
                     width: MediaQuery.of(context).size.width * 0.3, // 30% width
-                    padding: const EdgeInsets.symmetric(vertical: 12), // Padding vertical
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 12,
+                    ), // Padding vertical
                     child: ElevatedButton(
                       onPressed: singUp,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: primaryColor,
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 20), // Más padding para el botón
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 20,
+                        ), // Más padding para el botón
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
                       child: Text(
                         S.of(context).signup,
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 18),
                       ),
                     ),
                   ),
 
                   const SizedBox(height: 20),
 
-                  // Navigate to login page
-                  GestureDetector(
+                    // Navigate to login page
+                    GestureDetector(
                     onTap: () {
                       Navigator.pop(context); // Navigate back to login page
                     },
@@ -214,14 +265,21 @@ class _RegisterPageState extends State<RegisterPage> {
                       S.of(context).no_login,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        color: primaryColor,
+                      color: primaryColor,
+                      fontSize: 16, // Increased font size
+                       shadows: [
+                      Shadow(
+                        offset: Offset(2.0, 2.0), // Slight offset
+                        blurRadius: 4.0, // Blur effect
+                        color: Colors.black, // Black shadow
+                      ),
+                      ],
                       ),
                     ),
-                  ),
+                    ),
+                  
                 ],
               ),
-
             ),
           ),
         ],
