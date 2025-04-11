@@ -8,7 +8,7 @@ class MedicamentosStockPage extends StatefulWidget {
 }
 
 class _MedicamentosStockPageState extends State<MedicamentosStockPage> {
-  // Lista de medicamentos con parámetros predefinidos, cargar aqui los medicamentos desde la base de datos
+  // Listado de medicamentos
   List<dynamic> medicamentos = [];
   bool isLoading = true;
 
@@ -18,6 +18,9 @@ class _MedicamentosStockPageState extends State<MedicamentosStockPage> {
     fetchMedicamentos();
   }
 
+  /// Obtiene la lista de medicamentos desde la base de datos utilizando Supabase.
+  /// Este método realiza una consulta a la tabla 'products' en la base de datos
+  /// de Supabase y actualiza el estado del widget con los datos obtenidos.
   Future<void> fetchMedicamentos() async {
     final supabase = Supabase.instance.client;
     final response = await supabase.from('products').select();
@@ -40,15 +43,20 @@ class _MedicamentosStockPageState extends State<MedicamentosStockPage> {
                   return Card(
                     margin: EdgeInsets.all(10),
                     child: ListTile(
+
+                      // Espaciado alrededor del contenido
                       contentPadding: const EdgeInsets.all(
                         10,
-                      ), // Espaciado alrededor del contenido
+                      ), 
+
+                      // Imagen de medicamento
                       leading: Image.network(
                         medicamentos[index]['image_url']!,
                         height: 100, // Ajusta la altura de la imagen
                         width: 100, // Ajusta el ancho de la imagen
                       ),
 
+                      // Título del medicamento
                       title: Text(
                         item['name'] ?? 'Sin nombre',
                         style: const TextStyle(
@@ -56,6 +64,8 @@ class _MedicamentosStockPageState extends State<MedicamentosStockPage> {
                           fontWeight: FontWeight.bold, // Texto en negrita
                         ),
                       ),
+
+                      // Columna para mostrar información
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

@@ -1,11 +1,15 @@
+// IMPORTS
 import 'package:flutter/material.dart';
 import 'package:miniproyecto/generated/l10n.dart';
 import 'package:miniproyecto/screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
-import '../../pages/medicamentos_page.dart';
-import '../../pages/data_input_page.dart';
-import '../../pages/settings_page.dart';
+import '../../pages/crud/medicamentos_page.dart';
+import '../../pages/crud/data_input_page.dart';
+import '../../pages/settings/settings_page.dart';
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
+/// Widget de estado completo que representa una página dentro de la navegación.
 class PageOfPage extends StatefulWidget {
   const PageOfPage({super.key});
   @override
@@ -15,24 +19,25 @@ class PageOfPage extends StatefulWidget {
 class _PageOfPageState extends State<PageOfPage> {
   @override
   Widget build(BuildContext context) {
-    var selectedIndex = Provider.of<MyAppState>(context).selectedIndex;
+    var selectedIndex = Provider.of<MyAppState>(context).selectedIndex; // Obtiene el índice de la pestaña seleccionada
     var brightness = Theme.of(context).brightness; // Detecta el modo de tema
 
+    /// Muestra una página según el índice seleccionado o realiza una acción específica.
     Widget page;
     switch (selectedIndex) {
-      case 0: //home. Se agrega un valor válido para evitar error
+      case 0: // Se agrega un valor válido para evitar error
         page = Container(); // ⬅️ No mostramos ninguna pantalla aquí
         break;
-      case 1: //crud
+      case 1: // Listado Medicamentos
         page = StockPage();
         break;
-      case 2: //input
+      case 2: // CRUD
         page = DataInputPage();
         break;
-      case 3: //setting
+      case 3: // Ajustes
         page = SettingsPage();
         break;
-      case 4: //exit
+      case 4: // Cerrar sesion 
         Navigator.pop(context);
         return Scaffold(); // Devolvemos un Scaffold vacío
 
@@ -40,24 +45,28 @@ class _PageOfPageState extends State<PageOfPage> {
         throw UnimplementedError('no widget for $selectedIndex');
     }
 
+
     // Fondo principal que cambia dependiendo del tema
     var mainArea = ColoredBox(
       color:
           brightness == Brightness.dark
-              ? Colors.black
-              : Color.fromARGB(255, 238, 248, 246), // Fondo oscuro o claro
+              ? Colors.black // Fondo oscuro
+              : Color.fromARGB(255, 238, 248, 246), // Fondo claro
       child: AnimatedSwitcher(
-        duration: Duration(milliseconds: 200),
+        duration: Duration(milliseconds: 200), // Duración de la animación
         child: page,
       ),
     );
 
+    // Scaffold que contiene el AppBar y el cuerpo principal
     return Scaffold(
+
+      // AppBar con imagen y botón de notificaciones
       appBar: AppBar(
         backgroundColor:
             brightness == Brightness.dark
-                ? const Color(0xFF1E1E1E) // Cambia según el tema
-                : Color(0xFF248F8D), // Cambia según el tema
+                ? const Color(0xFF1E1E1E) // Tema oscuro
+                : Color(0xFF248F8D), // Tema claro
         title: Image.asset(
           "assets/logo.png", // Ruta de la imagen en assets
           height: 50, // Ajusta el tamaño según sea necesario
@@ -86,6 +95,9 @@ class _PageOfPageState extends State<PageOfPage> {
           ),
         ],
       ),
+
+
+      // Cuerpo principal que cambia según el tamaño de la pantalla
       body: LayoutBuilder(
         builder: (context, constraints) {
           if (constraints.maxWidth < 450) {
@@ -94,11 +106,14 @@ class _PageOfPageState extends State<PageOfPage> {
                 Expanded(child: mainArea),
                 SafeArea(
                   child: BottomNavigationBar(
+                    /// Establece el color de fondo de la barra de navegación inferior según el modo (oscuro o claro).
                     backgroundColor:
                         brightness == Brightness.dark
                             ? Colors.black
                             : Color(0xFF494949),
                     items: [
+
+                      /// Elemento de la barra de navegación inferior que representa la pantalla de inicio.
                       BottomNavigationBarItem(
                         icon: Icon(
                           Icons.home,
@@ -109,6 +124,8 @@ class _PageOfPageState extends State<PageOfPage> {
                         ),
                         label: S.of(context).home,
                       ),
+
+                      /// Elemento de la barra de navegación inferior que representa la pantalla de medicamentos.
                       BottomNavigationBarItem(
                         icon: Icon(
                           Icons.assessment_outlined,
@@ -119,6 +136,8 @@ class _PageOfPageState extends State<PageOfPage> {
                         ),
                         label: S.of(context).page1,
                       ),
+
+                      /// Elemento de la barra de navegación inferior que representa la pantalla de CRUD.
                       BottomNavigationBarItem(
                         icon: Icon(
                           Icons.add_box_outlined,
@@ -129,6 +148,8 @@ class _PageOfPageState extends State<PageOfPage> {
                         ),
                         label: S.of(context).page2,
                       ),
+
+                      /// Elemento de la barra de navegación inferior que representa la pantalla de ajustes.
                       BottomNavigationBarItem(
                         icon: Icon(
                           Icons.settings,
@@ -139,6 +160,8 @@ class _PageOfPageState extends State<PageOfPage> {
                         ),
                         label: S.of(context).page3,
                       ),
+
+                      /// Elemento de la barra de navegación inferior que representa la acción de cerrar sesión.
                       BottomNavigationBarItem(
                         icon: Icon(
                           Icons.exit_to_app,
@@ -149,24 +172,27 @@ class _PageOfPageState extends State<PageOfPage> {
                         ),
                         label: S.of(context).exit,
                       ),
+
                     ],
-                    currentIndex: selectedIndex,
-                    selectedItemColor: Color.fromARGB(255, 7, 219, 194),
-                    unselectedItemColor:
+
+                    /// Establece el índice seleccionado de la barra de navegación inferior.
+                    currentIndex: selectedIndex, // ⬅️ Índice seleccionado
+                    selectedItemColor: Color.fromARGB(255, 7, 219, 194), // ⬅️ Color de selección
+                    unselectedItemColor: // ⬅️ Color no seleccionado
                         brightness == Brightness.dark
                             ? Colors.white
                             : Colors.black,
 
+                    /// Maneja la navegación según el índice seleccionado, actualizando el estado o navegando entre pantallas.
                     onTap: (selectedIndex) {
                       final myAppState = Provider.of<MyAppState>(
                         context,
                         listen: false,
                       );
                       if (selectedIndex == 0) {
-                        // Navegar a Home + eliminar todo el historial
-                        Navigator.pushAndRemoveUntil(
+                        Navigator.pushAndRemoveUntil( // Eliminar todo el historial
                           context,
-                          MaterialPageRoute(builder: (context) => MyHomePage()),
+                          MaterialPageRoute(builder: (context) => MyHomePage()), // Navegar a Home 
                           (route) => false,
                         );
                       } else {
@@ -177,7 +203,7 @@ class _PageOfPageState extends State<PageOfPage> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PageOfPage(),
+                              builder: (context) => PageOfPage(), // Navegar a la página correspondiente
                             ),
                           );
                         } else {
@@ -185,6 +211,8 @@ class _PageOfPageState extends State<PageOfPage> {
                         }
                       }
                     },
+
+
                   ),
                 ),
               ],
@@ -196,11 +224,12 @@ class _PageOfPageState extends State<PageOfPage> {
                   child: NavigationRail(
                     backgroundColor:
                         brightness == Brightness.dark
-                            ? Color(0xFF121214)
-                            : Color(0xFF93C8BF), // Cambiado por el nuevo color
-
+                            ? Color(0xFF121214) // Tema oscuro
+                            : Color(0xFF93C8BF), // Tema claro 
                     extended: constraints.maxWidth >= 600,
                     destinations: [
+
+                      /// Elemento de la barra de navegación lateral que representa la pantalla de inicio.
                       NavigationRailDestination(
                         icon: Icon(
                           Icons.home,
@@ -219,6 +248,8 @@ class _PageOfPageState extends State<PageOfPage> {
                           ),
                         ),
                       ),
+
+                      /// Elemento de la barra de navegación lateral que representa la pantalla de medicamentos.
                       NavigationRailDestination(
                         icon: Icon(
                           Icons.assessment_outlined,
@@ -237,6 +268,8 @@ class _PageOfPageState extends State<PageOfPage> {
                           ),
                         ),
                       ),
+
+                      /// Elemento de la barra de navegación lateral que representa la pantalla de CRUD.
                       NavigationRailDestination(
                         icon: Icon(
                           Icons.add_box_outlined,
@@ -255,6 +288,8 @@ class _PageOfPageState extends State<PageOfPage> {
                           ),
                         ),
                       ),
+
+                      /// Elemento de la barra de navegación lateral que representa la pantalla de ajustes.
                       NavigationRailDestination(
                         icon: Icon(
                           Icons.settings,
@@ -274,18 +309,18 @@ class _PageOfPageState extends State<PageOfPage> {
                         ),
                       ),
                     ],
-                    selectedIndex: selectedIndex,
 
+
+                    selectedIndex: selectedIndex, // ⬅️ Índice seleccionado
                     onDestinationSelected: (selectedIndex) {
                       final myAppState = Provider.of<MyAppState>(
                         context,
                         listen: false,
                       );
                       if (selectedIndex == 0) {
-                        // Navegar a Home + eliminar todo el historial
-                        Navigator.pushAndRemoveUntil(
+                        Navigator.pushAndRemoveUntil( // Eliminar todo el historial
                           context,
-                          MaterialPageRoute(builder: (context) => MyHomePage()),
+                          MaterialPageRoute(builder: (context) => MyHomePage()), // Navegar a Home 
                           (route) =>
                               false, // Elimina todas las pantallas anteriores
                         );
@@ -306,6 +341,8 @@ class _PageOfPageState extends State<PageOfPage> {
                         }
                       }
                     },
+
+                    
                   ),
                 ),
                 Expanded(child: mainArea),
@@ -318,6 +355,7 @@ class _PageOfPageState extends State<PageOfPage> {
   }
 }
 
+/// Un widget sin estado que muestra la página MedicamentosStockPage dentro de un Scaffold.
 class StockPage extends StatelessWidget {
   const StockPage({super.key});
 
