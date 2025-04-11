@@ -1,0 +1,5 @@
+{
+    "docwriter.style": "Doxygen",
+    "docwriter.language": "Spanish",
+    "cmake.ignoreCMakeListsMissing": true
+}

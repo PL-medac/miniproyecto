@@ -1,3 +1,4 @@
+// IMPORTS
 import 'package:miniproyecto/generated/l10n.dart';
 import 'package:miniproyecto/repository/auth_service.dart';
 import 'package:miniproyecto/screens/auth/login_screen.dart';
@@ -7,10 +8,13 @@ import '../navigation/navigation_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:miniproyecto/providers/theme_provider.dart';
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  /// Construye la aplicación principal con múltiples proveedores y configuración de tema y localización.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -22,16 +26,16 @@ class MyApp extends StatelessWidget {
       child: Consumer2<LocaleProvider, ThemeProvider>(
         builder: (context, localeProvider, themeProvider, _) {
           return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'PharmaStock',
-            theme: themeProvider.lightTheme,
-            darkTheme: themeProvider.darkTheme,
+            debugShowCheckedModeBanner: false, // Desactiva la etiqueta de depuración
+            title: 'PharmaStock', // Título de la aplicación
+            theme: themeProvider.lightTheme, // Tema claro
+            darkTheme: themeProvider.darkTheme, // Tema oscuro
             themeMode: themeProvider.themeMode, // Establece el modo de tema
             localizationsDelegates: const [
               S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate, // localización de Material
+              GlobalWidgetsLocalizations.delegate, // localización de widgets
+              GlobalCupertinoLocalizations.delegate, // localización de Cupertino
             ],
             supportedLocales: S.delegate.supportedLocales,
             locale: localeProvider.locale,
@@ -43,6 +47,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
+/// Clase que gestiona el estado de la aplicación y notifica a los widgets dependientes cuando cambia el índice seleccionado.
 class MyAppState extends ChangeNotifier {
   int selectedIndex = 0;
 
@@ -52,6 +58,8 @@ class MyAppState extends ChangeNotifier {
   }
 }
 
+
+/// Página principal del estado de la aplicación.
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -59,16 +67,19 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+// / Estado de la página principal que construye la interfaz de usuario.
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      // Fondo de la página
+      appBar: AppBar( 
         backgroundColor:
             Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
                 ? const Color(0xFF1E1E1E) // Color para modo oscuro
                 : const Color(0xFF248F8D), // Color para modo claro
 
+      /// Agrega un botón de ícono en la barra de acciones que imprime "Notificaciones" al presionarlo.
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
@@ -82,12 +93,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
 
+      // Contenido de la página
       body: ListView(
         children: [
-          // Espacio arriba del logo
-          SizedBox(height: 75),
+          SizedBox(height: 75),  // Espacio arriba del logo
 
-          // Logo encima de los enlaces
+          // Logo 
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
             child: Image.asset(
@@ -98,13 +109,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
 
-          // Espacio debajo del logo
-          SizedBox(height: 15),
+          SizedBox(height: 15), // Espacio debajo del logo
 
-          // Botones de navegación
-          ElevatedButtonExample(),
+          ElevatedButtonExample(), // Botones de navegación
 
-          SizedBox(height: 75),
+          SizedBox(height: 75), // Espacio debajo de los botones
         ],
       ),
     );
@@ -116,85 +125,107 @@ class ElevatedButtonExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    /// Estilos botón 
     final ButtonStyle style = ElevatedButton.styleFrom(
       backgroundColor:
           Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
               ? const Color.fromARGB(255, 68, 51, 67) // Color para modo oscuro
               : const Color.fromARGB(255, 23, 109, 97), // Color para modo claro
-      foregroundColor: Colors.white,
-      textStyle: const TextStyle(fontSize: 18),
-      minimumSize: const Size(400, 60),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      foregroundColor: Colors.white, // Color del texto del botón
+      textStyle: const TextStyle(fontSize: 18), // Tamaño del texto
+      minimumSize: const Size(400, 60), // Tamaño mínimo del botón
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)), // Bordes redondeados
     );
+    
 
+    // Construcción de la interfaz de usuario
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10), // Margen lateral
-
       child: Center(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.min, // Tamaño mínimo de la columna
           children: <Widget>[
+
+
+            // Botón para la primera página
             ElevatedButton(
               style: style,
               onPressed: () {
                 //Provider.of<MyAppState>( context, listen: false,).updateIndex(1);
-
                 context.read<MyAppState>().updateIndex(1);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const PageOfPage()),
+                  MaterialPageRoute(builder: (_) => const PageOfPage()), // Página de navegación
                 );
               },
-
-              child: Text(S.of(context).page1),
+              child: Text(S.of(context).page1), // Texto del botón
             ),
-            const SizedBox(height: 20),
+
+
+
+            const SizedBox(height: 20), // Espacio entre botones
+         
+
+
+            // Botón para la segunda página
             ElevatedButton(
               style: style,
               onPressed: () {
                 //Provider.of<MyAppState>(context,listen: false, ).updateIndex(2);
-
                 context.read<MyAppState>().updateIndex(2);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const PageOfPage()),
+                  MaterialPageRoute(builder: (_) => const PageOfPage()), // Página de navegación
                 );
               },
-
-              child: Text(S.of(context).page2),
+              child: Text(S.of(context).page2), // Texto del botón
             ),
-            const SizedBox(height: 20),
+
+
+
+            const SizedBox(height: 20), // Espacio entre botones
+
+
+
+            // Botón para la tercera página
             ElevatedButton(
               style: style,
               onPressed: () {
                 //Provider.of<MyAppState>(context,listen: false,).updateIndex(3);
-
                 context.read<MyAppState>().updateIndex(3);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const PageOfPage()),
+                  MaterialPageRoute(builder: (_) => const PageOfPage()), // Página de navegación
                 );
               },
-
-              child: Text(S.of(context).page3),
+              child: Text(S.of(context).page3), // Texto del botón
             ),
-            const SizedBox(height: 20),
+
+
+
+            const SizedBox(height: 20), // Espacio entre botones
+
+
+
+            // Botón para cerrar sesión
             ElevatedButton(
               style: style,
-
+              /// Maneja el cierre de sesión del usuario y redirige a la página de inicio de sesión.
               onPressed: () async {
-                final authservice = AuthService();
-                await authservice.signOut();
-
+                final authservice = AuthService(); // Instancia del servicio de autenticación
+                await authservice.signOut(); // Cierra sesión del usuario
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (_) => const LoginPage()),
+                  MaterialPageRoute(builder: (_) => const LoginPage()), // Página de inicio de sesión
                   (route) => false,
                 );
               },
-
-              child: Text(S.of(context).exit),
+              child: Text(S.of(context).exit), // Texto del botón
             ),
+
+
+
           ],
         ),
       ),
@@ -202,12 +233,17 @@ class ElevatedButtonExample extends StatelessWidget {
   }
 }
 
+
+/// Proveedor de configuración de idioma que gestiona el idioma de la aplicación y lo guarda en preferencias compartidas.
 class LocaleProvider with ChangeNotifier {
   Locale _locale = const Locale('es'); // idioma por defecto
   Locale get locale => _locale;
   LocaleProvider() {
     _loadLocale(); // cargar idioma guardado
   }
+
+
+  /// Carga la configuración de idioma almacenada en preferencias compartidas y notifica a los oyentes.
   Future<void> _loadLocale() async {
     final prefs = await SharedPreferences.getInstance();
     final code = prefs.getString('localeCoder') ?? 'es';
@@ -215,6 +251,8 @@ class LocaleProvider with ChangeNotifier {
     notifyListeners();
   }
 
+
+  /// Establece el idioma de la aplicación y guarda la configuración en SharedPreferences.
   Future<void> setLocale(Locale locale) async {
     if (!['es', 'en'].contains(locale.languageCode)) return;
     _locale = locale;

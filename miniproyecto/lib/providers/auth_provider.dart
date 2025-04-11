@@ -3,6 +3,8 @@ import 'package:miniproyecto/screens/auth/login_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:miniproyecto/screens/home/home_screen.dart';
 
+/// Widget que gestiona la autenticación con Supabase y redirige al usuario
+/// según el estado de la sesión (activa o no activa).
 class AuthGate extends StatelessWidget {
   const AuthGate({super.key});
 
